@@ -315,13 +315,24 @@ html:has(body.out){scrollbar-width:none}html:has(body.out)::-webkit-scrollbar{di
   .auth .box:has(#ac)>:nth-child(9){grid-area:5/1/auto/-1;margin:0!important}
 }
 @media(max-height:620px){.auth .brand .bm,.auth .brand .bt{display:none}.auth h2{margin:4px 0 8px}}
+
+/* ===== fix: profile page stretched the layout (mobile browser zoomed out to "desktop mode") ===== */
+html{overflow-x:hidden;max-width:100%}
+.profile{grid-template-columns:280px minmax(0,1fr)}
+.two{grid-template-columns:minmax(0,1fr) 300px}
+.profile>*,.two>*,.grid>*,.grid1>*,.wrap>*{min-width:0}
+.graph{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.box{max-width:100%}
+@media(max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:800px){.profile{grid-template-columns:minmax(0,1fr)}}
+.logo .ver{font-size:11px;font-weight:500;color:#9da7b3;border:1px solid #6e7681;border-radius:2em;padding:0 7px;line-height:18px;margin-left:-2px}
 </style>
 </head>
 <body>
 <header>
   <a class="logo" href="#/">
     <svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="9" cy="25" r="3"/><circle cx="23" cy="12" r="3"/><path d="M9 10v12M23 15c0 5-6 5-12 8"/></svg>
-    <span class="lt"><b>Gitora</b></span>
+    <span class="lt"><b>Gitora</b></span><span class="ver">v1.1.2</span>
   </a>
   <input class="ah" id="gs" placeholder="Search repos, code, issues…  ( / )">
   <nav class="ah"><a href="#/">Dashboard</a><a href="#/explore">Explore</a></nav>
@@ -1080,7 +1091,7 @@ function octify(root){
     n.nodeValue.split(ICRE).forEach(part=>{const k=part.replace(/\uFE0F/g,"");
       if(IC[k]){const e=document.createElement("span");e.className="oi "+IC[k][0];e.innerHTML='<svg viewBox="0 0 16 16" aria-hidden="true">'+IC[k][1]+"</svg>";f.appendChild(e)}else if(part)f.appendChild(document.createTextNode(part))});
     n.parentNode.replaceChild(f,n)}}
-let _ot;new MutationObserver(()=>{clearTimeout(_ot);_ot=setTimeout(()=>{octify($("#app"));octify($("#modal"))},0)}).observe(document.body,{childList:true,subtree:true});
+let _ot;new MutationObserver(()=>{clearTimeout(_ot);_ot=setTimeout(()=>{octify($("#app"));octify($("#modal"));const g=$(".graph");if(g&&!g.dataset.s){g.dataset.s=1;g.scrollLeft=g.scrollWidth}},0)}).observe(document.body,{childList:true,subtree:true});
 
 function palette(){
   if(!db.profile)return;
