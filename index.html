@@ -634,6 +634,7 @@ function wiki(n,page,P){
 function barChart(vals,labels,color){
   const max=Math.max(1,...vals),w=vals.length,bw=520/w;
   return`<svg viewBox="0 0 520 134" style="width:100%;height:auto"><line x1="0" y1="110.5" x2="520" y2="110.5" stroke="var(--border)"/>${vals.map((v,i)=>{const h=Math.round(v/max*100);return`<rect x="${(i*bw+2).toFixed(1)}" y="${110-h}" width="${(bw-4).toFixed(1)}" height="${h}" rx="2" fill="${color||"#2ea043"}"><title>${esc(labels[i])}: ${v}</title></rect>`}).join("")}<text x="0" y="128" font-size="10" fill="var(--muted)">${esc(labels[0])}</text><text x="520" y="128" font-size="10" text-anchor="end" fill="var(--muted)">${esc(labels[w-1])}</text><text x="520" y="9" font-size="10" text-anchor="end" fill="var(--muted)">max ${max}</text></svg>`}
+function areaChart(v,lab,col,h){const W=520,H=h||110,mx=Math.max(...v,1),st=W/(v.length-1||1),l=v.map((y,i)=>(i*st).toFixed(1)+","+(H-4-(y/mx)*(H-14)).toFixed(1)).join(" ");return`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" preserveAspectRatio="none"><polygon points="0,${H-4} ${l} ${W},${H-4}" fill="${col}" fill-opacity=".3"/><polyline points="${l}" fill="none" stroke="${col}" stroke-width="1.6"/><title>Peak: ${mx}</title></svg>`}
 function insights(n,P){
   const r=R(n),t=P.get("tab")||"pulse",days=+(P.get("d")||7),now=Date.now(),since=now-days*864e5,cs=allCommits(r);
   const nav=[["pulse","Pulse"],["contributors","Contributors"],["commits","Commits"],["languages","Languages"]].map(([k,l])=>`<a class="${t==k?"on":""}" href="#/r/${n}/insights?tab=${k}">${l}</a>`).join("");
@@ -649,8 +650,15 @@ function insights(n,P){
     <div class="box"><h3>Merged pull requests</h3>${merged.map(i=>`<div class="ir">${icon(i)}<a href="#/r/${n}/pull/${i.n}">${esc(i.title)}</a><span class="mt">#${i.n}</span></div>`).join("")||'<div class="empty">None in this period.</div>'}</div>
     <div class="box"><h3>Opened issues</h3>${opened.map(i=>`<div class="ir">${icon(i)}<a href="#/r/${n}/issues/${i.n}">${esc(i.title)}</a><span class="mt">#${i.n}</span></div>`).join("")||'<div class="empty">None in this period.</div>'}</div>`}
   else if(t=="contributors"){
-    let add=0,del=0;cs.forEach(c=>(c.changes||[]).forEach(x=>{add+=x.add;del+=x.del}));
-    body=`<h3 style="margin:0 0 12px">Contributors</h3><div class="box"><div class="ir" style="display:block"><div style="display:flex;gap:10px;align-items:center">${avatarHTML(36)}<div><b>${esc(db.profile.username)}</b><div class="mt">${cs.length} commits · <span style="color:#3fb950">${add}++</span> <span style="color:var(--danger)">${del}--</span></div></div></div><div style="margin-top:12px">${barChart(weeks,wl)}</div></div></div>`}
+    const m=P.get("m")||"commits",col={commits:"#3fb950",additions:"#2ea043",deletions:"#f85149"}[m]||"#3fb950",us={};
+    const val=(c)=>m=="commits"?1:(c.changes||[]).reduce((s,x)=>s+(m=="additions"?x.add:x.del),0);
+    cs.forEach(c=>{const u=c.by||db.profile.username,o=us[u]=us[u]||{u,c:0,a:0,d:0,v:0,w:weeks.map(()=>0)};o.c++;(c.changes||[]).forEach(x=>{o.a+=x.add;o.d+=x.del});const i=25-Math.floor((now-c.time)/W),v=val(c);o.v+=v;if(i>=0&&i<=25)o.w[i]+=v});
+    const list=Object.values(us).sort((a,b)=>b.v-a.v||b.c-a.c),tw=weeks.map((_,i)=>list.reduce((s,o)=>s+o.w[i],0)),ax=`<div class="mt" style="display:flex;justify-content:space-between"><span>${wl[0]}</span><span>${wl[25]}</span></div>`;
+    const av=u=>u==db.profile.username?avatarHTML(36):`<span style="width:36px;height:36px;border-radius:50%;background:var(--purple);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700">${esc(u[0]||"?").toUpperCase()}</span>`;
+    body=`<div class="bar"><h3 style="margin:0">Contributors</h3><span class="sp"></span><span class="mt">${wl[0]} – ${wl[25]}</span><select id="cm">${["commits","additions","deletions"].map(k=>`<option value="${k}" ${k==m?"selected":""}>Contributions: ${k[0].toUpperCase()+k.slice(1)}</option>`).join("")}</select></div>
+    <p class="mt" style="margin-top:0">Contributions to ${esc(r.default)}, line counts have been omitted for merges.</p>
+    <div class="box" style="padding:16px">${areaChart(tw,wl,col,150)}${ax}</div>
+    ${list.map((o,i)=>`<div class="box"><div class="ir" style="display:block"><div style="display:flex;gap:10px;align-items:center">${av(o.u)}<div style="flex:1"><a href="#/u/${esc(o.u)}"><b>${esc(o.u)}</b></a> <span class="mt">#${i+1}</span><div class="mt">${o.c} commit${o.c!=1?"s":""} · <span style="color:#3fb950">${o.a}++</span> <span style="color:var(--danger)">${o.d}--</span></div></div></div><div style="margin-top:10px">${areaChart(o.w,wl,col,70)}</div></div></div>`).join("")||'<div class="empty">No commits yet.</div>'}`}
   else if(t=="commits"){
     const dow=[0,0,0,0,0,0,0];cs.forEach(c=>dow[new Date(c.time).getDay()]++);
     body=`<h3 style="margin:0 0 12px">Commit activity</h3><div class="box" style="padding:16px"><p class="mt" style="margin-top:0">Commits per week over the last 26 weeks</p>${barChart(weeks,wl)}</div>
@@ -660,6 +668,7 @@ function insights(n,P){
     body=`<h3 style="margin:0 0 12px">Languages</h3><div class="box" style="padding:16px">${ls.length?`<div class="lang" style="height:12px">${ls.map(x=>`<div style="width:${x.v/tot*100}%;background:${x.c}"></div>`).join("")}</div><table class="md" style="padding:0;width:100%;display:table">${ls.map(x=>`<tr><td><span class="dot" style="background:${x.c}"></span><b>${x.name}</b></td><td>${(x.v/tot*100).toFixed(1)}%</td><td>${size(x.v)}</td></tr>`).join("")}</table>`:'<div class="empty">No code yet.</div>'}</div>
     <div class="statg">${stat(Object.keys(r.branches[r.default].files).length,"Files")}${stat(Object.keys(r.branches).length,"Branches")}${stat(cs.length,"Commits")}${stat(r.releases.length,"Releases")}</div>`}
   app.innerHTML=head(n,"insights")+`<div class="wrap" style="max-width:1100px"><div class="insl"><nav class="sidenav">${nav}</nav><div>${body}</div></div></div>`;
+  if($("#cm"))$("#cm").onchange=()=>{location.hash=`#/r/${n}/insights?tab=contributors&m=${$("#cm").value}`};
   if($("#ind"))$("#ind").onchange=()=>{location.hash=`#/r/${n}/insights?tab=pulse&d=${$("#ind").value}`}}
 
 /* ---- GitHub-style header: menu drawer, breadcrumb, create menu, issues / PR / bell buttons ---- */
@@ -1065,6 +1074,8 @@ function aside(r,b){
   <div class="meta">📖 Readme</div>${r.license?`<div class="meta">⚖ ${esc(r.license)} license</div>`:""}
   <div class="meta">${r.starred?"★ 1 star":"☆ 0 stars"}</div><div class="meta">⑂ ${Object.keys(r.branches).length} branches</div></section>
   <section><h4>Releases <span class="count">${r.releases.length}</span></h4>${rel?`<b>${esc(rel.title||rel.tag)}</b> <span class="badge" style="color:#3fb950;border-color:#3fb950">Latest</span><div class="mt">${esc(rel.tag)} · ${ago(rel.time)}</div>`:'<span class="mt">No releases published</span>'}</section>
+  ${(()=>{const n=Object.keys(db.repos).find(k=>db.repos[k]===r),m={};allCommits(r).forEach(c=>{const u=c.by||db.profile.username;m[u]=(m[u]||0)+1});if(!Object.keys(m).length)m[db.profile.username]=0;const us=Object.entries(m).sort((x,y)=>y[1]-x[1]),av=u=>u==db.profile.username?avatarHTML(32):`<span title="${esc(u)}" style="width:32px;height:32px;border-radius:50%;background:var(--purple);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700">${esc(u[0]||"?").toUpperCase()}</span>`;
+  return`<section><h4><a href="#/r/${esc(n)}/graphs/contributors" style="color:inherit">Contributors</a> <span class="count">${us.length}</span></h4><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${us.slice(0,12).map(([u])=>`<a href="#/u/${esc(u)}" title="${esc(u)}" style="display:inline-flex">${av(u)}</a>`).join("")}</div>${us.slice(0,3).map(([u,c])=>`<div class="mt"><a href="#/u/${esc(u)}"><b>${esc(u)}</b></a> · ${c} commit${c!=1?"s":""}</div>`).join("")}${us.length>3?`<div class="mt">+ ${us.length-3} more</div>`:""}<a href="#/r/${esc(n)}/graphs/contributors" style="font-size:12px">View contributors graph →</a></section>`})()}
   <section style="border:0"><h4>Languages</h4>${ls.length?`<div class="lang">${ls.map(x=>`<div style="width:${x.v/tot*100}%;background:${x.c}"></div>`).join("")}</div>${ls.map(x=>`<span style="margin-right:10px;white-space:nowrap"><span class="dot" style="background:${x.c}"></span><b>${x.name}</b> ${(x.v/tot*100).toFixed(1)}%</span>`).join("")}`:'<span class="mt">No code yet</span>'}</section></aside>`}
 
 function tree(n,br,dir){
@@ -1445,7 +1456,7 @@ function aboutDev(){
   const LINKEDIN="https://www.linkedin.com/in/abhinavmaurya1/",INSTAGRAM="https://www.instagram.com/_abhinav_830_",LINKFORGE="https://abhinavmaurya12.github.io/LinkForge/",REPLICAX="https://abhinavmaurya12.github.io/ReplicaX/"; /* paste your LinkedIn / Instagram profile URLs between the quotes */
   const soc=(u,ic,l)=>u?`<a class="btn" href="${u}" target="_blank" rel="noopener noreferrer">${ic} ${l}</a>`:`<a class="btn" href="#" onclick="toast('${l} link not added yet');return false">${ic} ${l}</a>`;
   app.innerHTML=`<div class="wrap" style="max-width:860px"><div class="box"><div class="md" style="text-align:center;padding:32px 24px">
-  <img src="${gh}.png?size=240" alt="Abhinav Maurya" width="120" height="120" style="border-radius:50%;border:2px solid var(--border);background:var(--panel)" onerror="this.style.display='none'">
+  <div aria-label="Abhinav Maurya" style="width:120px;height:120px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;background:var(--purple);color:#fff;font-size:44px;font-weight:700;letter-spacing:1px;border:2px solid var(--border)">AM</div>
   <h1 style="border:0;margin:12px 0 0">Abhinav Maurya</h1>
   <div class="mt" style="font-size:14px">@abhinavmaurya12 · Developer of Gitora</div>
   <p style="margin:16px auto;max-width:560px">Hi! 👋 I'm the developer behind <b>Gitora</b>, a lightweight GitHub-style app that runs entirely in your browser. I enjoy building useful tools and sharing my code with others.</p>
@@ -1536,7 +1547,7 @@ function route(){
       case"pull":return thread(n,+seg[3],seg[4]=="files"?"files":"conv");
       case"compare":return compare(n,P);
       case"releases":return releases(n);
-      case"settings":return repoSettings(n,seg[3]);case"wiki":return wiki(n,seg[3]||"Home",P);case"projects":return projects(n,seg[3]);case"insights":return insights(n,P);case"milestones":return milestones(n,P);case"commit":return commitView(n,seg[3]);case"discussions":return discussions(n,seg[3]);case"actions":return actions(n,seg[3]);case"security":return security(n);case"history":return history(n,br,rest)}}
+      case"settings":return repoSettings(n,seg[3]);case"wiki":return wiki(n,seg[3]||"Home",P);case"projects":return projects(n,seg[3]);case"insights":return insights(n,P);case"graphs":return insights(n,new URLSearchParams("tab=contributors&"+P.toString()));case"milestones":return milestones(n,P);case"commit":return commitView(n,seg[3]);case"discussions":return discussions(n,seg[3]);case"actions":return actions(n,seg[3]);case"security":return security(n);case"history":return history(n,br,rest)}}
   notFound()}
 window.addEventListener("hashchange",()=>{route();window.scrollTo(0,0)});
 openDB().then(load).then(()=>{if(store.session&&store.accounts[store.session])activate(store.session);route()});
