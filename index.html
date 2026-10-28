@@ -1398,7 +1398,7 @@ function discussions(n,id){
 /* ================= About developer ================= */
 function aboutDev(){
   const gh="https://github.com/abhinavmaurya12";
-  const LINKEDIN="https://www.linkedin.com/in/abhinavmaurya1/",INSTAGRAM="https://www.instagram.com/_abhinav_830_",LINKFORGE="https://abhinavmaurya12.github.io/LinkForge/"; /* paste your LinkedIn / Instagram profile URLs between the quotes */
+  const LINKEDIN="https://www.linkedin.com/in/abhinavmaurya1/",INSTAGRAM="https://www.instagram.com/_abhinav_830_",LINKFORGE="https://abhinavmaurya12.github.io/LinkForge/",REPLICAX="https://abhinavmaurya12.github.io/ReplicaX/"; /* paste your LinkedIn / Instagram profile URLs between the quotes */
   const soc=(u,ic,l)=>u?`<a class="btn" href="${u}" target="_blank" rel="noopener noreferrer">${ic} ${l}</a>`:`<a class="btn" href="#" onclick="toast('${l} link not added yet');return false">${ic} ${l}</a>`;
   app.innerHTML=`<div class="wrap" style="max-width:860px"><div class="box"><div class="md" style="text-align:center;padding:32px 24px">
   <img src="${gh}.png?size=240" alt="Abhinav Maurya" width="120" height="120" style="border-radius:50%;border:2px solid var(--border);background:var(--panel)" onerror="this.style.display='none'">
@@ -1411,6 +1411,7 @@ function aboutDev(){
       View GitHub profile</a>
     <a class="btn" href="${gh}?tab=repositories" target="_blank" rel="noopener noreferrer">📁 Repositories</a>
     <a class="btn" href="${LINKFORGE}" target="_blank" rel="noopener noreferrer">🚀 LinkForge</a>
+    <a class="btn" href="${REPLICAX}" target="_blank" rel="noopener noreferrer">🧬 ReplicaX</a>
     <a class="btn" href="${gh}?tab=followers" target="_blank" rel="noopener noreferrer">⭐ Follow</a>
   </div></div></div>
   <div class="grid">
@@ -1424,6 +1425,10 @@ function aboutDev(){
       <p style="font-size:15px;color:var(--text);margin:0 0 4px"><b>All My Projects. One Destination. 🚀</b></p>
       <p style="max-width:620px;margin:0 auto 14px">LinkForge is a centralized showcase for my live websites and web development projects. It brings all my deployed projects together in one place, allowing visitors to explore my work and access live demos without searching through multiple repositories.</p>
       <a class="btn green" href="${LINKFORGE}" target="_blank" rel="noopener noreferrer">Visit LinkForge ↗</a></div>
+    <div class="card" style="grid-column:1/-1;text-align:center;padding:24px"><h4 style="font-size:20px">🚀 ReplicaX</h4>
+      <p style="font-size:15px;color:var(--text);margin:0 0 4px"><b>One Platform. Multiple Website Replicas.</b></p>
+      <p style="max-width:620px;margin:0 auto 14px">ReplicaX is a web development project dedicated to recreating and exploring popular website designs through frontend development. It serves as a growing collection of website replicas built to practice UI/UX design, responsive layouts, and modern web development techniques.</p>
+      <a class="btn green" href="${REPLICAX}" target="_blank" rel="noopener noreferrer">Visit ReplicaX ↗</a></div>
   </div></div>`}
 
 /* ================= router ================= */
