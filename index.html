@@ -16,7 +16,9 @@ header nav a{color:#fff;font-weight:600;margin-right:12px}
 header #gs{background:transparent;border:1px solid #6e7681;border-radius:6px;padding:5px 10px;color:#fff;width:260px;font-size:13px}
 .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;color:#fff}
 .logo svg{width:28px;height:28px}
+.sgrid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:32px}@media(max-width:860px){.sgrid{grid-template-columns:1fr}}.snav h5{margin:18px 0 6px;padding:0 12px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}.snav h5:first-child{margin-top:0}.snav a{display:block;padding:6px 12px;border-radius:6px;color:var(--text)}.snav a:hover{background:#6e76811a;text-decoration:none}.snav a.on{background:#6e768133;font-weight:600;box-shadow:inset 3px 0 #f78166}.srow{display:flex;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border)}.srow:last-child{border:0}
 .sp{flex:1}
+.vr{display:inline-block;vertical-align:middle;margin-left:6px;border:1px solid var(--border);border-radius:2em;padding:1px 9px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.3px}
 .wrap{max-width:1100px;margin:0 auto;padding:24px}
 .repohead{background:var(--panel);border-bottom:1px solid var(--border);padding:16px 24px 0}
 .title{display:flex;align-items:center;gap:8px;font-size:20px;flex-wrap:wrap}
@@ -418,7 +420,7 @@ body.out #hb,body.out #crumb{display:none}
   <a href="#/stars" data-k="#/stars"><span>⭐</span>Stars</a>
   <a href="#/gists" data-k="#/gists"><span>📋</span>Gists</a>
 </nav>
-<footer class="ah"><span><b>Gitora</b> v1.2.0 © 2026 · Code. Collaborate. Create.</span><a href="#/explore">Explore</a><a href="#/gists">Gists</a><a href="#/about">About Developer</a><a href="#" id="kh">Shortcuts</a><span class="sp"></span><span>Data is stored locally in this browser</span></footer>
+<footer class="ah"><span><b>Gitora</b> <span id="avr">v1.3.0</span> © 2026 · Code. Collaborate. Create.</span><a href="#/explore">Explore</a><a href="#/gists">Gists</a><a href="#/about">About Developer</a><a href="#" id="kh">Shortcuts</a><span class="sp"></span><span>Data is stored locally in this browser</span></footer>
 <div id="toast"></div>
 <div id="modal"></div>
 
@@ -904,7 +906,7 @@ function head(n,tab){
   <a class="${tab=="pulls"?"on":""}" href="#/r/${n}/pulls">⑂ Pull requests <span class="count">${open("pr")}</span></a>
   <a class="${tab=="releases"?"on":""}" href="#/r/${n}/releases">🏷 Releases <span class="count">${r.releases.length}</span></a>
   <a class="${tab=="wiki"?"on":""}" href="#/r/${n}/wiki">📖 Wiki</a><a class="${tab=="projects"?"on":""}" href="#/r/${n}/projects">▦ Projects <span class="count">${(r.projects||[]).length}</span></a><a class="${tab=="insights"?"on":""}" href="#/r/${n}/insights">📊 Insights</a>
-  <a class="${tab=="discussions"?"on":""}" href="#/r/${n}/discussions">💬 Discussions <span class="count">${(r.discussions||[]).length}</span></a><a class="${tab=="settings"?"on":""}" href="#/r/${n}/settings">⚙ Settings</a></div></div>`}
+  <a class="${tab=="discussions"?"on":""}" href="#/r/${n}/discussions">💬 Discussions <span class="count">${(r.discussions||[]).length}</span></a><a class="${tab=="actions"?"on":""}" href="#/r/${n}/actions">▶ Actions <span class="count">${(r.runs||[]).length}</span></a><a class="${tab=="security"?"on":""}" href="#/r/${n}/security">🛡 Security</a><a class="${tab=="settings"?"on":""}" href="#/r/${n}/settings">⚙ Settings</a></div></div>`}
 function branchSelect(n,br,kind,path){
   const r=R(n);
   return`<select id="brsel" data-n="${n}" data-k="${kind}" data-p="${esc(path||"")}">${Object.keys(r.branches).map(b=>`<option ${b==br?"selected":""}>${esc(b)}</option>`).join("")}<option value="__new">➕ New branch…</option></select>`}
@@ -943,9 +945,10 @@ const acct=()=>store.accounts[db.profile.username];
 async function hashPw(p,s){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s+p));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){let h=5381;for(const c of s+p)h=(h*33^c.charCodeAt(0))>>>0;return"x"+h}}
 function activate(u){const a=store.accounts[u];a.gists=a.gists||[];db={repos:a.repos,profile:a.profile};store.session=u;migrate();save()}
 function signOut(){store.session=null;db={repos:{},profile:null};save();toast("Signed out");location.hash="#/signin";route()}
+const APP_VR="v1.3.0";document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("avr");if(e)e.textContent=APP_VR});
 function auth(up){
   const hint=!up&&Object.values(store.accounts).some(a=>!a.hash)?'<div class="note blue">Your existing profile has no password yet. Enter its username and choose a password to secure it.</div>':"";
-  app.innerHTML=`<div class="auth"><div class="brand"><div class="bm"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="9" cy="25" r="3"/><circle cx="23" cy="12" r="3"/><path d="M9 10v12M23 15c0 5-6 5-12 8"/></svg></div><div class="bn">Gitora</div><div class="bt">Code. Collaborate. Create.</div></div><h2>${up?"Create your account":"Sign in to Gitora"}</h2>${hint}
+  app.innerHTML=`<div class="auth"><div class="brand"><div class="bm"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="9" cy="25" r="3"/><circle cx="23" cy="12" r="3"/><path d="M9 10v12M23 15c0 5-6 5-12 8"/></svg></div><div class="bn">Gitora <span class="vr">${APP_VR}</span></div><div class="bt">Code. Collaborate. Create.</div></div><h2>${up?"Create your account":"Sign in to Gitora"}</h2>${hint}
   <div class="box" style="padding:16px"><label style="margin-top:0">${up?"Username":"Username or email"}</label><input type="text" id="au" autofocus autocapitalize="off">
   ${up?'<label>Email</label><input type="text" id="ae">':""}<label>Password</label><input type="password" id="ap">
   ${up?'<label>Confirm password</label><input type="password" id="ac">':""}
@@ -1136,7 +1139,7 @@ function blob(n,br,path,P){
   <div class="box"><h3>${esc(path.split("/").pop())} <span class="badge">${f.text?f.content.split("\n").length+" lines · ":""}${size(sizeOf(f))}</span><span class="sp"></span>
     ${f.text&&isMD(path)?`<a class="btn" href="#/r/${n}/blob/${br}/${encodeURIComponent(path)}${showCode?"":"?code"}">${showCode?"Preview":"Code"}</a>`:""}
     ${f.text?`<button class="btn" id="cp">Copy</button><a class="btn" href="${L.edit(n,br,path)}">✏ Edit</a>`:""}
-    <button class="btn" id="raw">Raw</button><button class="btn" id="rn2">Rename</button><button class="btn" id="dl">⬇ Download</button><button class="btn danger" id="del">🗑 Delete</button></h3>${body}</div>
+    <a class="btn" href="#/r/${n}/history/${br}/${encodeURIComponent(path)}">🕘 History</a><button class="btn" id="raw">Raw</button><button class="btn" id="rn2">Rename</button><button class="btn" id="dl">⬇ Download</button><button class="btn danger" id="del">🗑 Delete</button></h3>${body}</div>
   <a href="${L.tree(n,br,dir)}">← Back to folder</a></div>`;
   bindBranch();
   if($("#cp"))$("#cp").onclick=()=>{try{navigator.clipboard.writeText(f.content);toast("Copied")}catch(e){toast("Copy failed")}};
@@ -1280,9 +1283,42 @@ function releases(n){
   $("#rp").onclick=()=>{const tag=$("#rt").value.trim();if(!tag)return toast("Tag is required");r.releases.unshift({tag,title:$("#rtt").value.trim(),body:$("#rb").value,time:Date.now()});save();toast("Release published");route()};
   document.querySelectorAll("[data-rd]").forEach(b=>b.onclick=()=>{if(confirm("Delete this release?")){r.releases.splice(+b.dataset.rd,1);save();route()}})}
 
-function repoSettings(n){
+const SETNAV=[["Access",[["general","General","⚙"],["collaborators","Collaborators","👥"],["moderation","Moderation options","🛡"]]],["Code, planning, and automation",[["branches","Branches","⑂"],["tags","Tags","🏷"],["rules","Rules","📏"],["actions","Actions","▶"],["webhooks","Webhooks","🪝"],["environments","Environments","🌐"],["codespaces","Codespaces","💻"],["pages","Pages","📄"]]],["Security and quality",[["security","Advanced Security","🔒"],["deploykeys","Deploy keys","🔑"],["secrets","Secrets and variables","✳"]]],["Integrations",[["apps","GitHub Apps","🧩"],["emails","Email notifications","✉"],["autolinks","Autolink references","🔗"]]]];
+const SETL={
+collaborators:{t:"Collaborators",d:"Invite people to work on this repository and choose their role.",f:[["a","Username"],["b","Role",["Read","Triage","Write","Maintain","Admin"]]],row:x=>`<b>${esc(x.a)}</b> <span class="badge">${esc(x.b)}</span>`,add:"Add collaborator"},
+branches:{t:"Branch protection rules",d:"Define rules for branches that match a name pattern.",f:[["a","Branch name pattern (e.g. main)"],["b","Rule",["Require pull request","Block force pushes","Require status checks","Require linear history"]]],row:x=>`<b>${esc(x.a)}</b> <span class="badge">${esc(x.b)}</span>`,add:"Add rule"},
+tags:{t:"Protected tags",d:"Tags matching a pattern can only be created by admins.",f:[["a","Tag pattern (e.g. v*)"]],row:x=>`🏷 <b>${esc(x.a)}</b>`,add:"Add tag rule"},
+rules:{t:"Rulesets",d:"Group rules that apply to branches or tags.",f:[["a","Ruleset name"],["b","Target",["Branches","Tags"]],["c","Enforcement",["Active","Evaluate","Disabled"]]],row:x=>`<b>${esc(x.a)}</b> <span class="badge">${esc(x.b)}</span> <span class="badge">${esc(x.c)}</span>`,add:"New ruleset"},
+webhooks:{t:"Webhooks",d:"Send event payloads to an external URL.",f:[["a","Payload URL (https://…)"],["b","Events",["Push","Pull requests","Issues","Everything"]]],row:x=>`🪝 <b>${esc(x.a)}</b> <span class="badge">${esc(x.b)}</span>`,add:"Add webhook"},
+environments:{t:"Environments",d:"Configure deployment targets such as production.",f:[["a","Environment name"],["b","Protection",["None","Required reviewers","Wait timer"]]],row:x=>`🌐 <b>${esc(x.a)}</b> <span class="badge">${esc(x.b)}</span>`,add:"New environment"},
+deploykeys:{t:"Deploy keys",d:"SSH keys with access to this repository only.",f:[["a","Title"],["b","Access",["Read-only","Read/write"]],["c","Key (ssh-ed25519 …)"]],row:x=>`🔑 <b>${esc(x.a)}</b> <span class="badge">${esc(x.b)}</span> <span class="mt">${esc((x.c||"").slice(0,24))}…</span>`,add:"Add deploy key"},
+secrets:{t:"Secrets and variables",d:"Secrets are hidden after saving; variables stay visible. Stored only in this browser.",f:[["a","Name (e.g. API_KEY)"],["b","Type",["Secret","Variable"]],["c","Value"]],row:x=>`✳ <b style="font-family:monospace">${esc(x.a.toUpperCase().replace(/\W/g,"_"))}</b> <span class="badge">${esc(x.b)}</span> <span class="mt">${x.b=="Secret"?"••••••••":esc(x.c||"")}</span>`,add:"Add"},
+autolinks:{t:"Autolink references",d:"Turn a prefix like JIRA- into a link in issues and commits.",f:[["a","Reference prefix (e.g. TICKET-)"],["b","Target URL (use <num>)"]],row:x=>`🔗 <b>${esc(x.a)}</b> → <span class="mt">${esc(x.b)}</span>`,add:"Add autolink"}};
+const SETT={
+moderation:{t:"Moderation options",d:"Choose which features are available on this repository.",o:[["issues","Issues","Track bugs and tasks",1],["wiki","Wikis","Document the project",1],["projects","Projects","Plan work on boards",1],["discussions","Discussions","Community conversations",1],["limit","Temporarily limit interactions","Only collaborators can comment",0]]},
+actions:{t:"Actions",d:"Control workflows for this repository.",o:[["on","Allow all actions and workflows","Run any workflow found in .github/workflows",1],["fork","Run workflows from fork pull requests","Needs approval from a maintainer",0],["rw","Workflows have read and write permissions","Otherwise read-only",0]]},
+codespaces:{t:"Codespaces",d:"Cloud development environments.",o:[["on","Enable Codespaces","Let collaborators open this repository in a cloud editor",1],["pre","Prebuilds","Speed up startup",0]]},
+pages:{t:"Pages",d:"Publish a static site from this repository.",o:[["on","Publish with Pages","Serve the default branch as a website",0],["https","Enforce HTTPS","",1]]},
+security:{t:"Advanced Security",d:"Find problems before they ship. Results appear in the Security tab.",o:[["secret","Secret scanning","Detect exposed keys and tokens",1],["dep","Dependency alerts","Flag vulnerable package versions",1],["push","Push protection","Warn before secrets are committed",0],["code","Code scanning","Run static analysis",0]]},
+emails:{t:"Email notifications",d:"Send activity emails for this repository.",o:[["issues","Issues and pull requests","",1],["push","Pushes","",0],["rel","Releases","",1]]},
+apps:{t:"GitHub Apps",d:"Install integrations. They act only inside this repository.",o:[["lint","Code Linter","Comments style problems on pull requests",0],["bot","Dependency Bot","Opens pull requests to update packages",0],["ci","CI Reporter","Posts workflow results",0],["slack","Chat Notifier","Sends events to chat",0]]}};
+function repoSettings(n,sec){const r=R(n);sec=sec||"general";ctx={n,br:r.default};r.cfg=r.cfg||{};const C=r.cfg;C.t=C.t||{};C.l=C.l||{};
+  app.innerHTML=head(n,"settings")+`<div class="wrap" style="max-width:1200px"><div class="sgrid"><nav class="snav">${SETNAV.map(([g,it])=>`<h5>${g}</h5>${it.map(([k,l,i])=>`<a class="${k==sec?"on":""}" href="#/r/${n}/settings/${k}">${i} ${l}</a>`).join("")}`).join("")}</nav><div id="sbody"></div></div></div>`;
+  const m=$("#sbody");
+  if(sec=="general")return setGeneral(n,m);
+  const T=SETT[sec],S=SETL[sec];if(!T&&!S)return notFound();
+  if(T){m.innerHTML=`<h3>${T.t}</h3><p class="mt">${T.d}</p><div class="box">${T.o.map(([k,l,d,df])=>{const v=C.t[sec+"."+k];return`<label class="srow" style="margin:0;font-weight:400"><input type="checkbox" data-t="${sec}.${k}" style="width:auto" ${(v==null?df:v)?"checked":""}><span style="flex:1"><b>${l}</b><br><span class="mt">${d}</span></span></label>`}).join("")}</div>${sec=="security"?`<a class="btn" href="#/r/${n}/security">Open Security tab</a>`:""}${sec=="actions"?`<a class="btn" href="#/r/${n}/actions">Open Actions tab</a>`:""}`;
+    m.querySelectorAll("[data-t]").forEach(c=>c.onchange=()=>{C.t[c.dataset.t]=c.checked;save();toast("Setting saved")});return}
+  const L2=C.l[sec]=C.l[sec]||[];
+  m.innerHTML=`<div class="bar"><h3 style="margin:0">${S.t}</h3><span class="sp"></span><button class="btn green" id="sa">${S.add}</button></div><p class="mt">${S.d}</p>
+  <div id="sf" class="box" style="display:none;padding:16px">${S.f.map(([k,l,o])=>`<label style="margin-top:0">${l}</label>${o?`<select data-f="${k}">${o.map(x=>`<option>${x}</option>`).join("")}</select>`:`<input type="text" data-f="${k}">`}`).join("")}<p style="margin:12px 0 0"><button class="btn green" id="sk">Save</button> <button class="btn" id="sc">Cancel</button></p></div>
+  <div class="box">${L2.length?L2.map((x,i)=>`<div class="srow"><span style="flex:1">${S.row(x)}</span><button class="btn danger" data-sd="${i}">Delete</button></div>`).join(""):'<div class="empty">Nothing here yet.</div>'}</div>`;
+  $("#sa").onclick=()=>$("#sf").style.display="";$("#sc").onclick=()=>$("#sf").style.display="none";
+  $("#sk").onclick=()=>{const x={};m.querySelectorAll("[data-f]").forEach(e=>x[e.dataset.f]=e.value.trim());if(!x.a)return toast("The first field is required");L2.push(x);save();toast("Saved");route()};
+  m.querySelectorAll("[data-sd]").forEach(b=>b.onclick=()=>{if(confirm("Delete this entry?")){L2.splice(+b.dataset.sd,1);save();route()}})}
+function setGeneral(n,mount){
   const r=R(n);
-  app.innerHTML=head(n,"settings")+`<div class="wrap" style="max-width:700px"><h3>General</h3>
+  mount.innerHTML=`<h3>General</h3>
   <label>Description</label><input type="text" id="sd" value="${esc(r.desc||"")}">
   <label>Topics <span class="hint">(comma separated)</span></label><input type="text" id="st" value="${esc(r.topics.join(", "))}">
   <label>License</label><select id="sl">${["","MIT","Apache-2.0","GPL-3.0","BSD-3-Clause"].map(l=>`<option value="${l}" ${l==r.license?"selected":""}>${l||"None"}</option>`).join("")}</select>
@@ -1290,11 +1326,19 @@ function repoSettings(n){
   <label>Visibility</label><select id="svis"><option value="">Public</option><option value="1" ${r.private?"selected":""}>Private</option></select>
   <label style="display:flex;gap:6px;font-weight:400"><input type="checkbox" id="spin" ${r.pinned?"checked":""} style="width:auto"> 📌 Pin to my profile</label><label style="display:flex;gap:6px;font-weight:400"><input type="checkbox" id="sarc" ${r.archived?"checked":""} style="width:auto"> 📦 Archive this repository</label><label>Repository name</label><input type="text" id="srn" value="${esc(n)}">
   <p><button class="btn green" id="ss">Save changes</button></p><hr style="border-color:var(--border);margin:24px 0">
-  <h3 style="color:var(--danger)">Danger zone</h3><button class="btn danger" id="dr">Delete this repository</button></div>`;
+  <h3 style="color:var(--danger)">Danger zone</h3><button class="btn danger" id="dr">Delete this repository</button>`;
   $("#ss").onclick=()=>{r.desc=$("#sd").value.trim();r.topics=$("#st").value.split(",").map(x=>x.trim().toLowerCase()).filter(Boolean);r.license=$("#sl").value;r.default=$("#sb").value;r.private=!!$("#svis").value;r.pinned=$("#spin").checked;r.archived=$("#sarc").checked;const nn=$("#srn").value.trim();if(nn&&nn!==n){if(!/^[\w.-]+$/.test(nn)||db.repos[nn])return toast("Invalid or taken name");db.repos[nn]=r;delete db.repos[n];save();toast("Renamed");location.hash="#/r/"+nn+"/settings";return}save();toast("Saved")};
   $("#dr").onclick=()=>{if(prompt(`Type "${n}" to confirm deletion`)===n){delete db.repos[n];save();location.hash="#/"}}}
 
-function profile(u){
+function userPkgs(){const o=[];for(const n of Object.keys(db.repos)){const fs=db.repos[n].branches[db.repos[n].default].files;for(const [p,f] of Object.entries(fs))if(/(^|\/)package\.json$/.test(p)&&f.text)try{const j=JSON.parse(f.content);if(j.name)o.push({n,p,name:j.name,v:j.version||"0.0.0",d:j.description||""})}catch(e){}}return o}
+function pTab(tab,names,P){
+  const q=P.get("q")||"";const fl=names.filter(n=>n.toLowerCase().includes(q.toLowerCase()));
+  const srch=(t)=>`<div class="bar"><input type="text" id="pf3" value="${esc(q)}" placeholder="Find ${t}…" style="flex:1"><a class="btn green" href="#/new">New</a></div>`;
+  if(tab=="repositories")return srch("a repository")+`<div class="grid" id="pr3">${fl.map(repoCard).join("")||'<div class="empty" style="grid-column:1/-1">No repositories match.</div>'}</div>`;
+  if(tab=="stars"){const s=names.filter(n=>R(n).starred);return s.length?`<div class="grid">${s.map(repoCard).join("")}</div>`:'<div class="empty">No starred repositories yet. Click ☆ Star on any repository.</div>'}
+  if(tab=="projects"){const a=[];names.forEach(n=>(R(n).projects||[]).forEach(p=>a.push({n,p})));return a.length?`<div class="grid">${a.map(({n,p})=>`<div class="card"><h4>▦ <a href="#/r/${n}/projects/${p.id}">${esc(p.name)}</a></h4><p>${esc(n)} · ${p.cols.length} columns · ${p.cols.reduce((s,c)=>s+c.cards.length,0)} cards</p><div class="mt">Updated ${ago(p.updated)}</div></div>`).join("")}</div>`:'<div class="empty">No projects yet. Open a repository and use its Projects tab.</div>'}
+  const k=userPkgs();return k.length?`<div class="box">${k.map(x=>`<div class="commit">📦 <b>${esc(x.name)}</b> <span class="badge">${esc(x.v)}</span><span class="msg">${esc(x.d)}</span><a href="${L.blob(x.n,R(x.n).default,x.p)}">${esc(x.n)}</a></div>`).join("")}</div>`:'<div class="empty">No packages found. Packages are detected from <code>package.json</code> files in your repositories.</div>'}
+function profile(u,P){P=P||new URLSearchParams();const tab=P.get("tab")||"overview";
   const p=db.profile;if(!p||u!==p.username)return notFound();
   const names=Object.keys(db.repos).sort((a,b)=>db.repos[b].updated-db.repos[a].updated);
   const days={},seen=new Set();let total=0,yr=0;
@@ -1313,19 +1357,19 @@ function profile(u){
   const pr0=db.repos[p.username],rk=pr0&&Object.keys(pr0.branches[pr0.default].files).find(k=>k.toLowerCase()==="readme.md");
   const web=p.website?(/^https?:/i.test(p.website)?p.website:"https://"+p.website):"";
   const starred=names.filter(n=>R(n).starred);
-  app.innerHTML=`<div class="wrap" style="max-width:1200px"><div class="profile"><div class="pside">
+  app.innerHTML=`<div class="wrap" style="max-width:1200px"><div class="tabs" style="margin:0 0 20px;border-bottom:1px solid var(--border)">${[["overview","Overview",""],["repositories","Repositories",names.length],["projects","Projects",names.reduce((x,n)=>x+(R(n).projects||[]).length,0)||""],["packages","Packages",userPkgs().length||""],["stars","Stars",starred.length||""]].map(([k,l,c])=>`<a class="${tab==k?"on":""}" href="#/u/${esc(p.username)}${k=="overview"?"":"?tab="+k}">${l}${c!==""?` <span class="count">${c}</span>`:""}</a>`).join("")}</div><div class="profile"><div class="pside">
     <div class="big">${avatarHTML(260)}</div><h1>${esc(p.name||p.username)}</h1><div class="un">${esc(p.username)}</div>
     ${p.bio?`<p>${esc(p.bio)}</p>`:""}<a class="btn" style="width:100%;justify-content:center;margin-bottom:12px" href="#/settings">Edit profile</a>
     <div class="stats"><span>📁 <b>${names.length}</b> repos</span><span>🕘 <b>${total}</b> commits</span><span>● <b>${iss}</b> issues</span><span>⑂ <b>${prs}</b> PRs</span></div>
     ${p.location?`<div class="meta">📍 ${esc(p.location)}</div>`:""}${web?`<div class="meta">🔗 <a href="${esc(web)}" target="_blank" rel="noopener">${esc(p.website)}</a></div>`:""}
     <div class="meta">📅 Joined ${new Date(p.joined).toLocaleDateString(undefined,{month:"long",year:"numeric"})}</div></div>
-  <div>${rk?`<div class="box"><h3>${esc(p.username)} / README.md<span class="sp"></span><a class="btn" href="${L.edit(p.username,pr0.default,rk)}">✏ Edit</a></h3><div class="md">${md(pr0.branches[pr0.default].files[rk].content,p.username)}</div></div>`:`<div class="note">💡 Create a repository named <b>${esc(p.username)}</b> with a README to show a profile README here.</div>`}
+  <div>${tab!="overview"?pTab(tab,names,P):""}<div ${tab!="overview"?"hidden":""}>${rk?`<div class="box"><h3>${esc(p.username)} / README.md<span class="sp"></span><a class="btn" href="${L.edit(p.username,pr0.default,rk)}">✏ Edit</a></h3><div class="md">${md(pr0.branches[pr0.default].files[rk].content,p.username)}</div></div>`:`<div class="note">💡 Create a repository named <b>${esc(p.username)}</b> with a README to show a profile README here.</div>`}
     ${names.some(n=>R(n).pinned)?`<h3>📌 Pinned</h3><div class="grid" style="margin-bottom:20px">${names.filter(n=>R(n).pinned).map(repoCard).join("")}</div>`:""}<div class="bar"><h3 style="margin:0">Repositories</h3><span class="sp"></span><input type="text" id="pf2" placeholder="Find a repository…" style="width:220px"><a class="btn green" href="#/new">New</a></div>
     <div class="grid" id="pr">${names.map(repoCard).join("")||'<div class="empty" style="grid-column:1/-1">No repositories yet.</div>'}</div>
     ${starred.length?`<h3 style="margin-top:24px">Starred</h3><div class="grid">${starred.map(repoCard).join("")}</div>`:""}
     <div class="box" style="margin-top:24px"><h3>${yr} contributions in the last year</h3><div style="padding:12px 16px"><div class="graph">${cells}</div>
-    <div class="legend">Less <i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i> More</div></div></div></div></div></div>`;
-  filterCards("#pf2","#pr .card")}
+    <div class="legend">Less <i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i> More</div></div></div></div></div></div></div>`;
+  filterCards("#pf2","#pr .card");filterCards("#pf3","#pr3 .card")}
 
 function editProfile(){
   const p=db.profile;let av=p.avatar||"";
@@ -1431,6 +1475,36 @@ function aboutDev(){
       <a class="btn green" href="${REPLICAX}" target="_blank" rel="noopener noreferrer">Visit ReplicaX ↗</a></div>
   </div></div>`}
 
+/* ===== Gitora extras: Actions, Security, File history ===== */
+function wfFiles(r){const f=r.branches[r.default].files;return Object.keys(f).filter(p=>/^\.github\/workflows\/[^\/]+\.ya?ml$/.test(p)&&f[p].text)}
+function wfName(r,p){const m=r.branches[r.default].files[p].content.match(/^name:\s*(.+)/m);return m?m[1].trim().replace(/^["']|["']$/g,""):p.split("/").pop()}
+function wfSteps(t){const s=[];t.split("\n").forEach(l=>{let m=l.match(/^\s+-?\s*name:\s*(.+)/);if(m)s.push({name:m[1].trim().replace(/^["']|["']$/g,""),cmd:""});m=l.match(/^\s+(?:-\s*)?(?:run|uses):\s*(.+)/);if(m&&s.length&&!s[s.length-1].cmd)s[s.length-1].cmd=m[1].trim()});return s.length?s:[{name:"Run job",cmd:""}]}
+function runWf(r,p){let bad=false,tot=0;const steps=wfSteps(r.branches[r.default].files[p].content).map(s=>{const ms=80+Math.floor(Math.random()*900);if(bad)return{name:s.name,skip:1,ok:0,ms:0,log:"Skipped because a previous step failed"};const f=/exit\s+[1-9]|(^|\s)false(\s|$)/.test(s.cmd);if(f)bad=true;tot+=ms;return{name:s.name,ok:!f,ms,log:(s.cmd?"$ "+s.cmd+"\n":"")+(f?"Error: process completed with exit code 1":"Done")}});
+  const u={id:rid(),wf:wfName(r,p),path:p,time:Date.now(),ms:tot,ok:!bad,by:db.profile.username,steps};r.runs.unshift(u);r.runs=r.runs.slice(0,50);save();return u}
+function actions(n,id){const r=R(n);r.runs=r.runs||[];ctx={n,br:r.default};const wf=wfFiles(r),ic=s=>s.skip?"⏭":s.ok?"✅":"❌";
+  if(id){const u=r.runs.find(x=>x.id==id);if(!u)return notFound();
+    app.innerHTML=head(n,"actions")+`<div class="wrap"><div class="bar"><a href="#/r/${n}/actions">← All workflows</a></div><div class="box"><h3>${u.ok?"✅":"❌"} ${esc(u.wf)} <span class="badge">${u.ok?"Success":"Failed"}</span><span class="sp"></span><span class="mt">${ago(u.time)} · ${u.ms} ms · ${esc(u.by)}</span></h3>${u.steps.map(s=>`<details ${s.ok||s.skip?"":"open"} style="border-bottom:1px solid var(--border);padding:8px 16px"><summary>${ic(s)} ${esc(s.name)} <span class="mt">${s.ms} ms</span></summary><pre class="code" style="padding:8px">${esc(s.log)}</pre></details>`).join("")}</div></div>`;return}
+  app.innerHTML=head(n,"actions")+`<div class="wrap"><div class="note blue">Workflows are read from <code>.github/workflows/*.yml</code>. Runs are simulated in your browser: each step's name and <code>run</code> command is listed, and a command with <code>exit 1</code> fails the run.</div>
+  <div class="box"><h3>Workflows <span class="sp"></span><button class="btn green" id="nw">New workflow</button></h3>${wf.length?wf.map(p=>`<div class="commit">⚙ <a href="${L.blob(n,r.default,p)}">${esc(wfName(r,p))}</a><span class="msg">${esc(p)}</span><button class="btn" data-run="${esc(p)}">▶ Run workflow</button></div>`).join(""):'<div class="empty">No workflows yet. Click “New workflow” for a starter CI file.</div>'}</div>
+  <div class="box"><h3>Workflow runs <span class="count">${r.runs.length}</span></h3>${r.runs.length?r.runs.map(u=>`<div class="commit">${u.ok?"✅":"❌"}<a href="#/r/${n}/actions/${u.id}" style="color:var(--text);font-weight:500">${esc(u.wf)}</a><span class="msg">#${u.id.slice(0,5)} · ${esc(u.by)}</span><span class="mt">${u.ms} ms · ${ago(u.time)}</span></div>`).join(""):'<div class="empty">No runs yet.</div>'}</div></div>`;
+  document.querySelectorAll("[data-run]").forEach(b=>b.onclick=()=>{const u=runWf(r,b.dataset.run);toast(u.ok?"Workflow succeeded":"Workflow failed");location.hash=`#/r/${n}/actions/${u.id}`});
+  $("#nw").onclick=()=>{const p=".github/workflows/ci.yml",fs=r.branches[r.default].files;if(fs[p])return toast("ci.yml already exists");fs[p]={text:true,content:"name: CI\non: [push, pull_request]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v4\n      - name: Install dependencies\n        run: npm ci\n      - name: Run tests\n        run: npm test\n",updated:Date.now()};commit(r,r.default,"Add CI workflow");toast("Workflow created");route()}}
+const SEC=[["AWS access key",/AKIA[0-9A-Z]{16}/],["GitHub token",/gh[pousr]_[A-Za-z0-9]{30,}/],["Private key",/-----BEGIN [A-Z ]*PRIVATE KEY-----/],["Hardcoded secret",/(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*["'][^"']{6,}["']/i]];
+const VULN={lodash:["4.17.21","Prototype pollution"],minimist:["1.2.6","Prototype pollution"],axios:["1.6.0","Credential leak via redirects"],express:["4.19.2","Open redirect"],jquery:["3.5.0","Cross-site scripting"],moment:["2.29.4","Path traversal / ReDoS"]};
+const vlt=(a,b)=>{const x=a.split(".").map(Number),y=b.split(".").map(Number);for(let i=0;i<3;i++){if((x[i]||0)!=(y[i]||0))return(x[i]||0)<(y[i]||0)}return false};
+function security(n){const r=R(n),fs=r.branches[r.default].files,sec=[],dep=[];ctx={n,br:r.default};
+  for(const [p,f] of Object.entries(fs)){if(!f.text)continue;f.content.split("\n").forEach((l,i)=>{for(const [k,re] of SEC)if(re.test(l)){sec.push({k,p,ln:i+1});break}});
+    if(/(^|\/)package\.json$/.test(p))try{const j=JSON.parse(f.content);for(const [d,v] of Object.entries(Object.assign({},j.dependencies,j.devDependencies))){const m=String(v).match(/\d+(\.\d+){0,2}/);if(VULN[d]&&m&&vlt(m[0].split(".").concat(["0","0"]).slice(0,3).join("."),VULN[d][0]))dep.push({d,v,p,fix:VULN[d][0],why:VULN[d][1]})}}catch(e){}}
+  const pol=Object.keys(fs).some(p=>/^(\.github\/)?SECURITY\.md$/i.test(p));
+  app.innerHTML=head(n,"security")+`<div class="wrap"><div class="grid1">
+  <div class="box"><h3>${pol?"✅":"⚠️"} Security policy <span class="sp"></span>${pol?"":'<a class="btn" href="'+L.edit(n,r.default,"SECURITY.md")+'">Add SECURITY.md</a>'}</h3><div style="padding:12px 16px" class="mt">${pol?"This repository has a security policy.":"Tell people how to report vulnerabilities privately."}</div></div>
+  <div class="box"><h3>🔑 Secret scanning <span class="count">${sec.length}</span></h3>${sec.length?sec.map(s=>`<div class="commit">🚨 <b>${s.k}</b><span class="msg"><a href="${L.blob(n,r.default,s.p)}">${esc(s.p)}</a> line ${s.ln}</span></div>`).join(""):'<div class="empty">No exposed secrets found in the default branch.</div>'}</div>
+  <div class="box"><h3>📦 Dependency alerts <span class="count">${dep.length}</span></h3>${dep.length?dep.map(d=>`<div class="commit">⚠️ <b>${esc(d.d)}</b> ${esc(d.v)}<span class="msg">${esc(d.why)} · upgrade to ≥ ${d.fix} · ${esc(d.p)}</span></div>`).join(""):'<div class="empty">No known vulnerable dependencies in package.json files.</div>'}</div></div>
+  <p class="hint">Scans run locally on the default branch against a small built-in rule set; they are not a replacement for a real scanner.</p></div>`}
+function history(n,br,path){const r=R(n);if(!r.branches[br])return notFound();ctx={n,br};
+  const cs=r.branches[br].commits.map(c=>({c,h:(c.changes||[]).find(x=>x.p==path)})).filter(x=>x.h);
+  app.innerHTML=head(n,"code")+`<div class="wrap"><div class="bar"><h3 style="margin:0">History for ${esc(path)}</h3><span class="sp"></span><a class="btn" href="${L.blob(n,br,path)}">View file</a></div><div class="box">${cs.length?cs.map(({c,h})=>`<div class="commit"><a style="font-family:monospace" href="#/r/${n}/commit/${c.id}">${c.id.slice(0,7)}</a><a href="#/r/${n}/commit/${c.id}" style="color:var(--text);font-weight:500">${esc(c.msg)}</a><span class="msg"></span><span class="mt"><b style="color:#3fb950">+${h.add}</b> <b style="color:var(--danger)">−${h.del}</b> · ${h.t} · ${ago(c.time)}</span></div>`).join(""):'<div class="empty">No recorded history for this file.</div>'}</div></div>`}
+
 /* ================= router ================= */
 function markNav(){
   const h=(location.hash||"#/").split("?")[0];
@@ -1445,7 +1519,7 @@ function route(){
   const hash=(location.hash||"#/").slice(1),h=hash.split("?")[0];
   const seg=h.split("/").filter(Boolean).map(decodeURIComponent),P=new URLSearchParams(hash.split("?")[1]||"");
   if(!seg.length)return home();
-  switch(seg[0]){case"u":return profile(seg[1]);case"about":return aboutDev();case"settings":return editProfile();case"new":return newRepo();case"explore":return explore(P);case"search":return search(P);case"stars":return stars();case"gists":return gists(P);case"notifications":return notifications();case"issues":return globalList("issue");case"pulls":return globalList("pr");case"signin":case"signup":location.hash="#/";return}
+  switch(seg[0]){case"u":return profile(seg[1],P);case"about":return aboutDev();case"settings":return editProfile();case"new":return newRepo();case"explore":return explore(P);case"search":return search(P);case"stars":return stars();case"gists":return gists(P);case"notifications":return notifications();case"issues":return globalList("issue");case"pulls":return globalList("pr");case"signin":case"signup":location.hash="#/";return}
   if(seg[0]=="r"){
     const n=seg[1],a=seg[2],r=R(n);if(!r)return notFound();
     const br=seg[3]||r.default,rest=seg[4]||"";
@@ -1462,7 +1536,7 @@ function route(){
       case"pull":return thread(n,+seg[3],seg[4]=="files"?"files":"conv");
       case"compare":return compare(n,P);
       case"releases":return releases(n);
-      case"settings":return repoSettings(n);case"wiki":return wiki(n,seg[3]||"Home",P);case"projects":return projects(n,seg[3]);case"insights":return insights(n,P);case"milestones":return milestones(n,P);case"commit":return commitView(n,seg[3]);case"discussions":return discussions(n,seg[3])}}
+      case"settings":return repoSettings(n,seg[3]);case"wiki":return wiki(n,seg[3]||"Home",P);case"projects":return projects(n,seg[3]);case"insights":return insights(n,P);case"milestones":return milestones(n,P);case"commit":return commitView(n,seg[3]);case"discussions":return discussions(n,seg[3]);case"actions":return actions(n,seg[3]);case"security":return security(n);case"history":return history(n,br,rest)}}
   notFound()}
 window.addEventListener("hashchange",()=>{route();window.scrollTo(0,0)});
 openDB().then(load).then(()=>{if(store.session&&store.accounts[store.session])activate(store.session);route()});
