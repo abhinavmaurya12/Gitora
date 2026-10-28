@@ -326,18 +326,88 @@ html{overflow-x:hidden;max-width:100%}
 @media(max-width:860px){.two{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:800px){.profile{grid-template-columns:minmax(0,1fr)}}
 .logo .ver{font-size:11px;font-weight:500;color:#9da7b3;border:1px solid #6e7681;border-radius:2em;padding:0 7px;line-height:18px;margin-left:-2px}
+
+/* ================= Gitora 1.2 additions ================= */
+#hdr{display:flex;align-items:center;gap:14px}
+.code tr.hl td{background:#bb800933}.code td.n{cursor:pointer}.code td.n:hover{color:var(--text)}
+input[type=date]{background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 10px;font:inherit;color-scheme:inherit}
+.rx{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:6px 12px;border-top:1px solid var(--border)}
+.rxb{background:var(--panel);border:1px solid var(--border);border-radius:2em;padding:0 9px;line-height:22px;font-size:12px;color:var(--text);cursor:pointer;font-family:inherit}
+.rxb:hover{border-color:#8b949e}.rxb.on{background:#388bfd26;border-color:#388bfd66}
+.rxadd{position:relative;display:inline-block}
+.rxpick{display:none;position:absolute;left:0;bottom:30px;background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:6px;gap:4px;z-index:6;box-shadow:0 8px 24px #0006}
+.rxadd.open .rxpick{display:flex}
+.kb{display:flex;gap:12px;overflow-x:auto;align-items:flex-start;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+.kcol{flex:0 0 290px;background:var(--panel);border:1px solid var(--border);border-radius:8px;display:flex;flex-direction:column;max-height:72vh}
+.kh{display:flex;align-items:center;gap:6px;padding:8px 10px;border-bottom:1px solid var(--border)}
+.kh .btn{padding:1px 8px;min-height:0}
+.kbody{padding:8px;min-height:60px;overflow:auto;display:flex;flex-direction:column;gap:8px;border-radius:0 0 8px 8px}
+.kbody.over{background:#388bfd1a}
+.kcard{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;cursor:grab;word-break:break-word;font-size:13px}
+.kcard:hover{border-color:#8b949e}
+.kcard .ka{display:flex;gap:4px;margin-top:6px;opacity:.6}.kcard:hover .ka{opacity:1}
+.kcard .ka .btn{padding:0 8px;min-height:0;font-size:12px}
+.prog{height:8px;background:#6e768133;border-radius:4px;overflow:hidden}.prog i{display:block;height:100%;background:#2ea043}
+.insl{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px}
+.sidenav a{display:block;padding:6px 12px;border-radius:6px;color:var(--text);border-left:2px solid transparent}
+.sidenav a:hover{background:#6e76811a;text-decoration:none}
+.sidenav a.on{background:#6e76811a;border-left-color:#f78166;font-weight:600}
+.statg{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.stat{border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--panel)}.stat b{display:block;font-size:22px}
+.wiki{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px}
+.notif .ir.un{background:#388bfd0d}
+.dot2{width:8px;height:8px;border-radius:50%;background:#1f6feb;margin-top:7px;flex:none}
+@media(max-width:860px){.wiki{grid-template-columns:minmax(0,1fr)}.insl{grid-template-columns:minmax(0,1fr)}.sidenav{display:flex;overflow-x:auto}.sidenav a{white-space:nowrap}}
+@media(max-width:700px){.kcol{flex-basis:84vw}}
+@media(hover:none){.kcard .ka{opacity:1}}
+
+/* ================= GitHub-style header ================= */
+header{gap:12px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:16px;align-items:center}
+.hbtn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:32px;height:32px;padding:0 8px;color:#fff;background:transparent;border:1px solid #6e7681;border-radius:6px;cursor:pointer;font:inherit;line-height:1}
+.hbtn:hover{background:#ffffff1f;border-color:#8b949e;text-decoration:none}
+.hbtn svg{display:block}
+header .logo{gap:0}
+header .logo svg{width:32px;height:32px}
+header .logo .lt{display:none}
+#hb{order:0}
+#crumb{display:flex;align-items:center;gap:6px;color:#fff;font-size:14px;min-width:0;white-space:nowrap;overflow:hidden}
+#crumb .cr{color:#fff;display:inline-flex;align-items:center}#crumb .cr.b{font-weight:600}#crumb a.cr:hover{text-decoration:underline}
+#crumb .csl{color:#8b949e}
+.sbox{position:relative;display:flex;align-items:center}
+.sbox>svg{position:absolute;left:10px;width:14px;height:14px;color:#9da7b3;pointer-events:none}
+.sbox #gs{width:272px;height:32px;padding:0 34px 0 32px;background:#0d111780;transition:width .15s,background .15s}
+.sbox #gs::placeholder{color:#9da7b3}
+.sbox:focus-within #gs{width:360px;background:var(--bg)}
+.sbox kbd{position:absolute;right:8px;color:#9da7b3;border-color:#6e7681;background:transparent;pointer-events:none}
+.sbox:focus-within kbd{display:none}
+#hdr{gap:8px}
+.bdg{position:absolute;top:-6px;right:-6px;background:#1f6feb;color:#fff;border-radius:2em;font-size:10px;font-weight:600;padding:0 5px;line-height:16px;min-width:16px;text-align:center}
+#pm .mh{padding:6px 12px 2px;font-size:12px;color:var(--muted)}
+#pm{width:240px}
+body.out #hb,body.out #crumb{display:none}
+.ov.drw{padding:0;justify-content:flex-start}
+.drawer{width:min(320px,86vw);height:100%;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:12px;animation:dr .16s ease}
+@keyframes dr{from{transform:translateX(-24px);opacity:0}}
+.drawer .dh{display:flex;align-items:center;gap:10px;padding:2px 4px 14px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.drawer a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;color:var(--text)}
+.drawer a:hover{background:#6e76811a;text-decoration:none}
+.drawer .dt{display:flex;align-items:center;justify-content:space-between;padding:12px 10px 4px;font-size:12px;font-weight:600;color:var(--muted);border-top:1px solid var(--border);margin-top:8px}
+@media(max-width:900px){#crumb{display:none}.sbox #gs{width:200px}.sbox:focus-within #gs{width:240px}}
+@media(max-width:700px){
+  header{padding-top:max(10px,env(safe-area-inset-top));padding-bottom:10px;gap:10px}
+  .sbox{order:4;flex:1 1 100%}.sbox #gs,.sbox:focus-within #gs{width:100%;height:38px}
+  .hbtn.hm{display:none}
+  header .logo svg{width:28px;height:28px}
+}
 </style>
 </head>
 <body>
 <header>
-  <a class="logo" href="#/">
-    <svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="9" cy="25" r="3"/><circle cx="23" cy="12" r="3"/><path d="M9 10v12M23 15c0 5-6 5-12 8"/></svg>
-    <span class="lt"><b>Gitora</b></span><span class="ver">v1.1.2</span>
-  </a>
-  <input class="ah" id="gs" placeholder="Search repos, code, issues…  ( / )">
-  <nav class="ah"><a href="#/">Dashboard</a><a href="#/explore">Explore</a></nav>
+  <button class="hbtn ah" id="hb" aria-label="Open navigation" title="Menu"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h12"/></svg></button>
+  <a class="logo" href="#/" title="Gitora"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="9" cy="25" r="3"/><circle cx="23" cy="12" r="3"/><path d="M9 10v12M23 15c0 5-6 5-12 8"/></svg><span class="lt"><b>Gitora</b></span></a>
+  <div id="crumb" class="ah"></div>
   <span class="sp"></span>
-  <a class="btn green ah" href="#/new">+ New</a>
+  <label class="sbox ah"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><input id="gs" placeholder="Search or jump to…" autocomplete="off"><kbd>/</kbd></label>
   <div id="hdr"></div>
 </header>
 <div id="app"></div>
@@ -348,10 +418,293 @@ html{overflow-x:hidden;max-width:100%}
   <a href="#/stars" data-k="#/stars"><span>⭐</span>Stars</a>
   <a href="#/gists" data-k="#/gists"><span>📋</span>Gists</a>
 </nav>
-<footer class="ah"><span><b>Gitora</b> © 2026 · Code. Collaborate. Create.</span><a href="#/explore">Explore</a><a href="#/gists">Gists</a><a href="#" id="kh">Shortcuts</a><span class="sp"></span><span>Data is stored locally in this browser</span></footer>
+<footer class="ah"><span><b>Gitora</b> v1.2.0 © 2026 · Code. Collaborate. Create.</span><a href="#/explore">Explore</a><a href="#/gists">Gists</a><a href="#/about">About Developer</a><a href="#" id="kh">Shortcuts</a><span class="sp"></span><span>Data is stored locally in this browser</span></footer>
 <div id="toast"></div>
 <div id="modal"></div>
 
+<script>
+/* ===== Gitora 1.2 — extra GitHub features: commit details, wiki, projects, milestones, insights, notifications, reactions ===== */
+const TPL={
+  bug:"### Describe the bug\nA clear and concise description of what the bug is.\n\n### Steps to reproduce\n1. Go to '...'\n2. Click on '...'\n3. See error\n\n### Expected behavior\n\n### Screenshots / environment\n",
+  feat:"### Is your feature request related to a problem?\n\n### Describe the solution you'd like\n\n### Alternatives you've considered\n\n### Additional context\n",
+  q:"### Question\n\n### What have you tried?\n"};
+const RX=["👍","👎","😄","🎉","😕","❤️","🚀","👀"];
+
+/* ---- commit snapshots & change tracking ---- */
+function mkSnap(files){const s={};for(const [p,f] of Object.entries(files))s[p]={t:f.text?1:0,c:f.text?f.content:null,k:f.text?"":(f.content||"").length+":"+(f.content||"").slice(-24)};return s}
+function baseline(r){for(const b of Object.values(r.branches))b.snap=mkSnap(b.files)}
+function chg(p,t,a,c){
+  const o={p,t,add:0,del:0,ops:null,bin:false};
+  if((a&&!a.t)||(c&&!c.t)){o.bin=true;return o}
+  const ops=lineDiff(a?a.c.split("\n"):[],c?c.c.split("\n"):[]);
+  for(const x of ops){if(x[0]=="+")o.add++;else if(x[0]=="-")o.del++}
+  const keep=new Array(ops.length).fill(false);
+  ops.forEach((x,i)=>{if(x[0]!=" ")for(let j=Math.max(0,i-3);j<=Math.min(ops.length-1,i+3);j++)keep[j]=true});
+  const out=[];let gap=false;
+  ops.forEach((x,i)=>{if(keep[i]){if(gap&&out.length)out.push(["~",""]);gap=false;out.push(x)}else gap=true});
+  o.ops=out.slice(0,600);return o}
+function calcChanges(r,br){
+  const b=r.branches[br];
+  if(!b.snap){b.snap=mkSnap(b.files);return[]}
+  const prev=b.snap,cur=mkSnap(b.files),out=[];
+  for(const p of Object.keys(cur)){const a=prev[p],c=cur[p];
+    if(!a)out.push(chg(p,"added",null,c));
+    else if(a.t!==c.t||a.c!==c.c||a.k!==c.k)out.push(chg(p,"modified",a,c))}
+  for(const p of Object.keys(prev))if(!cur[p])out.push(chg(p,"deleted",prev[p],null));
+  b.snap=cur;return out.sort((x,y)=>x.p.localeCompare(y.p)).slice(0,100)}
+function allCommits(r){const seen=new Set(),out=[];for(const b of Object.values(r.branches))for(const c of b.commits)if(!seen.has(c.id)){seen.add(c.id);out.push(c)}return out}
+const diffRows=ops=>ops.map(o=>o[0]=="~"?'<tr class="dc"><td colspan="2">⋯</td></tr>':`<tr class="d${o[0]=="+"?"a":o[0]=="-"?"r":""}"><td class="n">${o[0]}</td><td>${esc(o[1])||" "}</td></tr>`).join("");
+
+function commitView(n,id){
+  const r=R(n);let c=null,bn="",idx=0;
+  for(const [k,b] of Object.entries(r.branches)){const i=b.commits.findIndex(x=>x.id==id);if(i>=0){c=b.commits[i];bn=k;idx=i;break}}
+  if(!c)return notFound();
+  const list=r.branches[bn].commits,par=list[idx+1],nxt=list[idx-1],ch=c.changes;
+  const add=(ch||[]).reduce((s,x)=>s+x.add,0),del=(ch||[]).reduce((s,x)=>s+x.del,0);
+  const lines=c.msg.split("\n"),by=c.by||db.profile.username;
+  const files=!ch?'<div class="empty">File-level details weren\'t recorded for this older commit.</div>'
+   :!ch.length?'<div class="empty">No file changes in this commit.</div>'
+   :`<p class="mt" style="margin:0 0 12px">Showing <b style="color:var(--text)">${ch.length}</b> changed file${ch.length>1?"s":""} with <b style="color:#3fb950">${add} additions</b> and <b style="color:var(--danger)">${del} deletions</b>.</p>`+ch.map(x=>`<div class="box"><h3><b>${esc(x.p)}</b> <span class="badge">${x.t}</span><span class="sp"></span><span style="color:#3fb950">+${x.add}</span> <span style="color:var(--danger)">−${x.del}</span></h3>${x.bin?`<div class="empty">Binary file ${x.t}</div>`:x.ops&&x.ops.length?`<div style="overflow:auto"><table class="diff">${diffRows(x.ops)}</table></div>`:'<div class="empty">No textual changes to display.</div>'}</div>`).join("");
+  app.innerHTML=head(n,"code")+`<div class="wrap" style="max-width:1100px"><div class="box"><div style="padding:16px"><h3 style="margin:0 0 8px;border:0;padding:0;background:none;font-size:18px">${esc(lines[0])}</h3>${lines.slice(1).join("\n").trim()?`<pre class="code" style="padding:8px 0">${esc(lines.slice(1).join("\n").trim())}</pre>`:""}
+  <div class="bar" style="margin:8px 0 0"><span style="display:flex">${avatarHTML(20)}</span><b>${esc(by)}</b><span class="mt">committed ${ago(c.time)} · on <a href="${L.tree(n,bn,"")}">${esc(bn)}</a></span><span class="sp"></span>
+  ${par?`<span class="mt">parent <a href="#/r/${n}/commit/${par.id}" style="font-family:monospace">${par.id.slice(0,7)}</a></span>`:""}<span class="mt">commit <code style="font-family:monospace">${c.id.slice(0,7)}</code></span>
+  ${nxt?`<a class="btn" href="#/r/${n}/commit/${nxt.id}">Next ›</a>`:""}</div></div></div>${files}<a href="#/r/${n}/commits/${bn}">← All commits</a></div>`}
+
+/* ---- notifications ---- */
+function notifItems(){
+  const out=[];
+  for(const [n,r] of Object.entries(db.repos))for(const i of r.issues){
+    const h=`#/r/${n}/${i.type=="pr"?"pull":"issues"}/${i.n}`;
+    out.push({t:i.created,n,i,h,txt:(i.type=="pr"?"Pull request":"Issue")+" opened"});
+    if(i.state=="merged"&&i.mergedAt)out.push({t:i.mergedAt,n,i,h,txt:"Pull request merged"});
+    for(const c of i.comments)out.push({t:c.time,n,i,h,txt:"New comment from "+c.author})}
+  return out.sort((a,b)=>b.t-a.t)}
+function unread(){const a=acct();if(a.readAt==null){a.readAt=Date.now();save()}return notifItems().filter(x=>x.t>a.readAt).length}
+function notifications(){
+  const a=acct(),read=a.readAt||0,items=notifItems();
+  app.innerHTML=`<div class="wrap" style="max-width:900px"><div class="bar"><h2 style="margin:0">Notifications</h2><span class="sp"></span><button class="btn" id="mar">✓ Mark all as read</button></div>
+  <div class="box notif">${items.length?items.map(x=>`<div class="ir ${x.t>read?"un":""}">${x.t>read?'<span class="dot2"></span>':'<span style="width:8px;flex:none"></span>'}${icon(x.i)}<div style="flex:1"><a class="tt" href="${x.h}">${esc(x.i.title)}</a><div class="mt">${esc(x.n)}#${x.i.n} · ${esc(x.txt)} · ${ago(x.t)}</div></div></div>`).join(""):'<div class="empty"><h3>You\'re all caught up</h3><p>Activity on issues and pull requests shows up here.</p></div>'}</div></div>`;
+  $("#mar").onclick=()=>{a.readAt=Date.now();save();renderHeader();route();toast("Marked all as read")}}
+
+/* ---- global Issues / Pull requests ---- */
+function globalList(type){
+  const P=new URLSearchParams((location.hash.split("?")[1])||""),st=P.get("state")||"open",rows=[];
+  for(const [n,r] of Object.entries(db.repos))for(const i of r.issues)if(i.type==type)rows.push({n,i});
+  const open=rows.filter(x=>x.i.state=="open"),closed=rows.filter(x=>x.i.state!="open");
+  const shown=(st=="open"?open:closed).sort((a,b)=>b.i.created-a.i.created),base="#/"+(type=="pr"?"pulls":"issues");
+  app.innerHTML=`<div class="wrap" style="max-width:1000px"><h2>${type=="pr"?"Pull requests":"Issues"}</h2><div class="box"><h3><a href="${base}" style="color:var(--text);${st=="open"?"font-weight:700":""}">● ${open.length} Open</a><a href="${base}?state=closed" style="color:var(--text);${st!="open"?"font-weight:700":""}">✓ ${closed.length} Closed</a></h3>
+  ${shown.map(({n,i})=>`<div class="ir">${icon(i)}<div style="flex:1"><a class="tt" href="#/r/${n}/${type=="pr"?"pull":"issues"}/${i.n}">${esc(i.title)}</a>${i.labels.map(chip).join("")}<div class="mt">${esc(n)}#${i.n} · ${i.state=="merged"?"merged":i.state=="open"?"opened":"closed"} ${ago(i.created)}${type=="pr"?` · ${esc(i.head)} → ${esc(i.base)}`:""}</div></div>${i.comments.length?`<span class="mt">💬 ${i.comments.length}</span>`:""}</div>`).join("")||`<div class="empty">Nothing here.</div>`}</div></div>`}
+
+/* ---- reactions, assignees, edit ---- */
+function rxBar(n,num,it,key){
+  const m=(it.react||{})[key]||{},on=Object.keys(m).filter(e=>m[e]>0);
+  return`<div class="rx">${on.map(e=>`<button class="rxb on" data-react="${n}|${num}|${key}|${e}">${e} ${m[e]}</button>`).join("")}<span class="rxadd"><button class="rxb" data-rxopen="1">☺ React</button><span class="rxpick">${RX.map(e=>`<button class="rxb" data-react="${n}|${num}|${key}|${e}">${e}</button>`).join("")}</span></span></div>`}
+function editIssueDlg(n,num){
+  const it=R(n).issues.find(x=>x.n==num);if(!it)return;
+  $("#modal").innerHTML=`<div class="ov"><div class="dlg" style="padding:16px"><h4 style="margin:0 0 10px">Edit ${it.type=="pr"?"pull request":"issue"} #${num}</h4><input type="text" id="eit" value="${esc(it.title)}"><div style="height:8px"></div><textarea id="eib" style="min-height:160px">${esc(it.body||"")}</textarea><p style="margin:12px 0 0;display:flex;gap:8px"><button class="btn green" id="eis">Save</button><button class="btn" id="eic">Cancel</button></p></div></div>`;
+  $("#eic").onclick=closeModal;
+  $("#eis").onclick=()=>{const t=$("#eit").value.trim();if(!t)return toast("Title is required");it.title=t;it.body=$("#eib").value;save();closeModal();route()}}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-react]");
+  if(b){const [n,num,key,em]=b.dataset.react.split("|"),it=R(n).issues.find(x=>x.n==+num);it.react=it.react||{};const m=it.react[key]=it.react[key]||{};m[em]=m[em]?0:1;save();route();return}
+  const o=e.target.closest("[data-rxopen]");if(o){o.parentElement.classList.toggle("open");return}
+  const ed=e.target.closest("[data-edit]");if(ed){const [n,num]=ed.dataset.edit.split("|");editIssueDlg(n,+num);return}
+  const ln=e.target.closest(".code td.n");
+  if(ln){const tr=ln.parentElement,was=tr.classList.contains("hl");document.querySelectorAll(".code tr.hl").forEach(x=>x.classList.remove("hl"));if(!was)tr.classList.add("hl")}});
+document.addEventListener("change",e=>{
+  const s=e.target.closest&&e.target.closest(".sel2");if(!s)return;
+  const it=R(s.dataset.n).issues.find(x=>x.n==+s.dataset.num);if(!it)return;it[s.dataset.f]=s.value;save();toast("Updated")});
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-tpl]");if(!t)return;
+  const ib=$("#ib");if(!ib)return;ib.value=TPL[t.dataset.tpl];
+  const ti=$("#it");if(ti&&!ti.value.trim())ti.value=t.dataset.pre||"";
+  document.querySelectorAll(".lbc").forEach(x=>x.checked=x.value==t.dataset.lb)});
+
+/* ---- milestones ---- */
+function milestones(n,P){
+  const r=R(n);r.milestones=r.milestones||[];
+  const st=P.get("state")=="closed"?"closed":"open",list=r.milestones.filter(m=>m.state==st);
+  const prog=m=>{const is=r.issues.filter(i=>i.milestone==m.id),d=is.filter(i=>i.state!="open").length;return{t:is.length,d,o:is.length-d,p:is.length?Math.round(d/is.length*100):0}};
+  app.innerHTML=head(n,"issues")+`<div class="wrap" style="max-width:900px"><div class="bar"><h3 style="margin:0">Milestones</h3><span class="sp"></span><a class="btn" href="#/r/${n}/issues">Back to issues</a><button class="btn green" id="nm">New milestone</button></div>
+  <div id="mf" class="box" style="display:none;padding:16px"><label style="margin-top:0">Title *</label><input type="text" id="mt"><label>Due date <span class="hint">(optional)</span></label><input type="date" id="md"><label>Description</label><textarea id="mdsc" style="min-height:80px"></textarea><p style="margin:12px 0 0"><button class="btn green" id="mc">Create milestone</button></p></div>
+  <div class="box"><h3><a href="#/r/${n}/milestones" style="color:var(--text);${st=="open"?"font-weight:700":""}">${r.milestones.filter(m=>m.state=="open").length} Open</a><a href="#/r/${n}/milestones?state=closed" style="color:var(--text);${st=="closed"?"font-weight:700":""}">${r.milestones.filter(m=>m.state=="closed").length} Closed</a></h3>
+  ${list.map(m=>{const p=prog(m),late=m.due&&m.state=="open"&&new Date(m.due+"T23:59:59")<Date.now();
+    return`<div class="ir" style="display:block"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><a class="tt" style="font-size:16px" href="#/r/${n}/issues?milestone=${m.id}&state=open">${esc(m.title)}</a><span class="sp"></span>${m.state=="open"?`<button class="btn" data-mcl="${m.id}">Close</button>`:`<button class="btn" data-mop="${m.id}">Reopen</button>`}<button class="btn danger" data-mdl="${m.id}">Delete</button></div>
+    <div class="mt" style="margin:4px 0 8px">${m.due?`<span style="${late?"color:var(--danger)":""}">${late?"Past due · ":"Due by "}${new Date(m.due+"T00:00:00").toLocaleDateString(undefined,{month:"long",day:"numeric",year:"numeric"})}</span>`:"No due date"}</div>${m.desc?`<p style="margin:0 0 8px">${esc(m.desc)}</p>`:""}
+    <div class="prog"><i style="width:${p.p}%"></i></div><div class="mt" style="margin-top:6px"><b style="color:var(--text)">${p.p}%</b> complete · ${p.o} open · ${p.d} closed</div></div>`}).join("")||`<div class="empty">No ${st} milestones.${st=="open"?" Milestones help you track progress on groups of issues.":""}</div>`}</div></div>`;
+  $("#nm").onclick=()=>{$("#mf").style.display=""};
+  $("#mc").onclick=()=>{const t=$("#mt").value.trim();if(!t)return toast("Title is required");r.milestones.push({id:rid(),title:t,due:$("#md").value,desc:$("#mdsc").value.trim(),state:"open"});save();toast("Milestone created");route()};
+  const set=(a,f)=>document.querySelectorAll(`[${a}]`).forEach(b=>b.onclick=()=>{const m=r.milestones.find(x=>x.id==b.getAttribute(a));f(m);save();route()});
+  set("data-mcl",m=>m.state="closed");set("data-mop",m=>m.state="open");
+  document.querySelectorAll("[data-mdl]").forEach(b=>b.onclick=()=>{if(!confirm("Delete this milestone?"))return;r.milestones=r.milestones.filter(x=>x.id!=b.dataset.mdl);r.issues.forEach(i=>{if(i.milestone==b.dataset.mdl)i.milestone=""});save();route()})}
+
+/* ---- projects (kanban) ---- */
+function moveCard(p,cid,toCol,idx){
+  let card=null;
+  for(const c of p.cols){const i=c.cards.findIndex(x=>x.id==cid);if(i>=0){card=c.cards.splice(i,1)[0];break}}
+  if(!card)return;const to=p.cols.find(c=>c.id==toCol);if(!to)return;
+  idx==null||idx<0||idx>to.cards.length?to.cards.push(card):to.cards.splice(idx,0,card)}
+function projects(n,id){
+  const r=R(n);r.projects=r.projects||[];
+  if(id){const p=r.projects.find(x=>x.id==id);if(!p)return notFound();return board(n,p)}
+  app.innerHTML=head(n,"projects")+`<div class="wrap" style="max-width:900px"><div class="bar"><h3 style="margin:0">Projects</h3><span class="sp"></span><button class="btn green" id="np">New project</button></div>
+  <div id="pf" class="box" style="display:none;padding:16px"><label style="margin-top:0">Project name *</label><input type="text" id="pn"><label>Template</label><select id="pt2"><option value="kan">Basic kanban — To do, In progress, Done</option><option value="bug">Bug triage — Backlog, Triaged, Fixing, Fixed</option><option value="blank">Blank</option></select><p style="margin:12px 0 0"><button class="btn green" id="pk">Create project</button></p></div>
+  ${r.projects.length?`<div class="grid">${r.projects.map(p=>`<div class="card"><h4>▦ <a href="#/r/${n}/projects/${p.id}">${esc(p.name)}</a></h4><p>${p.cols.length} columns · ${p.cols.reduce((s,c)=>s+c.cards.length,0)} cards</p><div class="mt">Updated ${ago(p.updated||Date.now())}</div></div>`).join("")}</div>`:'<div class="empty"><h3>Plan with a project board</h3><p>Organise issues and notes into columns and drag them between stages.</p></div>'}</div>`;
+  $("#np").onclick=()=>{$("#pf").style.display="";$("#pn").focus()};
+  $("#pk").onclick=()=>{const nm=$("#pn").value.trim();if(!nm)return toast("Project name is required");
+    const T={kan:["To do","In progress","Done"],bug:["Backlog","Triaged","Fixing","Fixed"],blank:["Column 1"]}[$("#pt2").value];
+    const p={id:rid(),name:nm,created:Date.now(),updated:Date.now(),cols:T.map(t=>({id:rid(),name:t,cards:[]}))};
+    r.projects.push(p);save();location.hash=`#/r/${n}/projects/${p.id}`}}
+function board(n,p){
+  const r=R(n);
+  const cardHTML=(c,col)=>{
+    const it=c.issue?r.issues.find(x=>x.n==c.issue):null;
+    const body=it?`${icon(it)} <a href="#/r/${n}/${it.type=="pr"?"pull":"issues"}/${it.n}">${esc(it.title)}</a> <span class="mt">#${it.n}</span>`:esc(c.text);
+    return`<div class="kcard" draggable="true" data-card="${c.id}">${body}<div class="ka"><button class="btn" data-mv="${c.id}" title="Move to next column">▸</button><button class="btn" data-ced="${c.id}" title="Edit">✏</button><button class="btn danger" data-cdl="${c.id}" title="Delete">✕</button></div></div>`};
+  app.innerHTML=head(n,"projects")+`<div class="wrap" style="max-width:1400px"><div class="bar"><a href="#/r/${n}/projects">Projects</a><span>/</span><h3 style="margin:0">▦ ${esc(p.name)}</h3><span class="sp"></span><button class="btn" id="rnp">Rename</button><button class="btn" id="addc">+ Add column</button><button class="btn danger" id="delp">Delete project</button></div>
+  <div class="kb">${p.cols.map(col=>`<div class="kcol"><div class="kh"><b>${esc(col.name)}</b><span class="count">${col.cards.length}</span><span class="sp"></span><button class="btn" data-addcard="${col.id}" title="Add card">+</button><button class="btn" data-delcol="${col.id}" title="Delete column">✕</button></div><div class="kbody" data-drop="${col.id}">${col.cards.map(c=>cardHTML(c,col)).join("")||'<div class="mt" style="padding:8px;text-align:center">Drop cards here</div>'}</div></div>`).join("")||'<div class="empty" style="flex:1">No columns yet. Add one to get started.</div>'}</div></div>`;
+  const done=()=>{p.updated=Date.now();r.updated=Date.now();save();route()};
+  $("#rnp").onclick=()=>{const v=prompt("Project name:",p.name);if(v&&v.trim()){p.name=v.trim();done()}};
+  $("#addc").onclick=()=>{const v=prompt("Column name:");if(v&&v.trim()){p.cols.push({id:rid(),name:v.trim(),cards:[]});done()}};
+  $("#delp").onclick=()=>{if(confirm("Delete this project?")){r.projects=r.projects.filter(x=>x!==p);save();location.hash=`#/r/${n}/projects`}};
+  document.querySelectorAll("[data-addcard]").forEach(b=>b.onclick=()=>{
+    const v=prompt("Card note — or type #12 to link issue / pull request 12:");if(!v||!v.trim())return;
+    const col=p.cols.find(c=>c.id==b.dataset.addcard),m=v.trim().match(/^#(\d+)$/),card={id:rid(),text:v.trim()};
+    if(m){if(!r.issues.find(x=>x.n==+m[1]))return toast("No issue or pull request #"+m[1]);card.issue=+m[1]}
+    col.cards.push(card);done()});
+  document.querySelectorAll("[data-delcol]").forEach(b=>b.onclick=()=>{if(confirm("Delete this column and its cards?")){p.cols=p.cols.filter(c=>c.id!=b.dataset.delcol);done()}});
+  document.querySelectorAll("[data-cdl]").forEach(b=>b.onclick=()=>{p.cols.forEach(c=>c.cards=c.cards.filter(x=>x.id!=b.dataset.cdl));done()});
+  document.querySelectorAll("[data-ced]").forEach(b=>b.onclick=()=>{
+    for(const c of p.cols){const cd=c.cards.find(x=>x.id==b.dataset.ced);if(cd){if(cd.issue)return toast("Linked cards follow their issue");const v=prompt("Edit card:",cd.text);if(v&&v.trim()){cd.text=v.trim();done()}}}});
+  document.querySelectorAll("[data-mv]").forEach(b=>b.onclick=()=>{
+    const i=p.cols.findIndex(c=>c.cards.some(x=>x.id==b.dataset.mv));if(i<0)return;
+    moveCard(p,b.dataset.mv,p.cols[(i+1)%p.cols.length].id,null);done()});
+  let drag=null;
+  document.querySelectorAll(".kcard").forEach(el=>{
+    el.ondragstart=e=>{drag=el.dataset.card;e.dataTransfer.setData("text/plain",drag);el.style.opacity=".4"};
+    el.ondragend=()=>{el.style.opacity=""}});
+  document.querySelectorAll(".kbody").forEach(b=>{
+    b.ondragover=e=>{e.preventDefault();b.classList.add("over")};
+    b.ondragleave=()=>b.classList.remove("over");
+    b.ondrop=e=>{e.preventDefault();b.classList.remove("over");if(!drag)return;
+      const els=[...b.querySelectorAll(".kcard")].filter(x=>x.dataset.card!=drag);
+      const idx=els.findIndex(el=>{const rc=el.getBoundingClientRect();return e.clientY<rc.top+rc.height/2});
+      moveCard(p,drag,b.dataset.drop,idx<0?null:idx);drag=null;done()}})}
+
+/* ---- wiki ---- */
+function wiki(n,page,P){
+  const r=R(n);r.wiki=r.wiki||{};
+  const names=Object.keys(r.wiki).sort((a,b)=>a=="Home"?-1:b=="Home"?1:a.localeCompare(b));
+  const side=`<aside><section><h4>Pages <span class="count">${names.length}</span></h4>${names.map(p=>`<div style="margin:4px 0"><a href="#/r/${n}/wiki/${encodeURIComponent(p)}" style="${p==page?"font-weight:700;color:var(--text)":""}">${esc(p)}</a></div>`).join("")||'<span class="mt">No pages yet</span>'}</section><section style="border:0"><a class="btn green" href="#/r/${n}/wiki/_new">+ New page</a></section></aside>`;
+  const wrap=inner=>head(n,"wiki")+`<div class="wrap" style="max-width:1200px"><div class="wiki"><div>${inner}</div>${side}</div></div>`;
+  const wl=s=>s.replace(/\[\[([^\]|]+)\]\]/g,(m,t)=>`[${t.trim()}](#/r/${n}/wiki/${encodeURIComponent(t.trim())})`);
+  const cur=r.wiki[page];
+  if(page=="_new"||P.has("edit")){
+    const isNew=page=="_new";
+    const init=cur?cur.content:(page=="Home"?`# Welcome to the ${n} wiki\n\nWrite documentation here. Link pages with [[Page name]].\n`:"");
+    app.innerHTML=wrap(`<h3 style="margin:0 0 10px">${isNew?"Create new page":"Edit "+esc(page)}</h3>${isNew?'<input type="text" id="wt" placeholder="Page title" autofocus><div style="height:10px"></div>':""}${mdBox("wb",init,"Write a page… use [[Page name]] to link pages",300)}
+    <label>Edit message</label><input type="text" id="wm" value="${cur?"Update "+esc(page):"Create page"}"><p><button class="btn green" id="ws">Save page</button> <a class="btn" href="#/r/${n}/wiki${isNew?"":"/"+encodeURIComponent(page)}">Cancel</a>${cur?' <button class="btn danger" id="wd">Delete page</button>':""}</p>`);
+    bindMd("wb",n);
+    $("#ws").onclick=()=>{
+      const nm=isNew?$("#wt").value.trim():page;
+      if(!nm)return toast("Page title is required");
+      if(isNew&&r.wiki[nm])return toast("A page with that title already exists");
+      const old=r.wiki[nm],hist=old?[...(old.hist||[]),{time:old.time,msg:old.msg||"",content:old.content}].slice(-30):[];
+      r.wiki[nm]={content:$("#wb").value,time:Date.now(),rev:(old?old.rev||1:0)+1,msg:$("#wm").value,hist};
+      r.updated=Date.now();save();toast("Page saved");location.hash=`#/r/${n}/wiki/${encodeURIComponent(nm)}`};
+    if($("#wd"))$("#wd").onclick=()=>{if(confirm("Delete the page “"+page+"”?")){delete r.wiki[page];save();location.hash=`#/r/${n}/wiki`}};
+    return}
+  if(!cur){
+    app.innerHTML=wrap(names.length?`<div class="empty"><h3>Page not found</h3><p>“${esc(page)}” doesn't exist yet.</p><a class="btn green" href="#/r/${n}/wiki/${encodeURIComponent(page)}?edit">Create this page</a></div>`
+      :`<div class="empty"><h3>Welcome to the wiki</h3><p>Document your project with pages that link to each other.</p><a class="btn green" href="#/r/${n}/wiki/Home?edit">Create the first page</a></div>`);return}
+  if(P.has("history")){
+    const h=[{time:cur.time,msg:cur.msg||"",content:cur.content,now:1},...(cur.hist||[]).slice().reverse()];
+    app.innerHTML=wrap(`<div class="bar"><h3 style="margin:0">Revisions · ${esc(page)}</h3><span class="sp"></span><a class="btn" href="#/r/${n}/wiki/${encodeURIComponent(page)}">Back to page</a></div><div class="box">${h.map((v,i)=>`<div class="ir"><div style="flex:1"><b>${esc(v.msg||"Edit")}</b> ${v.now?'<span class="badge">current</span>':""}<div class="mt">${ago(v.time)}</div></div>${v.now?"":`<button class="btn" data-rs="${i-1}">Restore</button>`}</div>`).join("")}</div>`);
+    document.querySelectorAll("[data-rs]").forEach(b=>b.onclick=()=>{
+      const rev=(cur.hist||[]).slice().reverse()[+b.dataset.rs];if(!rev)return;
+      cur.hist=[...(cur.hist||[]),{time:cur.time,msg:cur.msg||"",content:cur.content}].slice(-30);
+      cur.content=rev.content;cur.time=Date.now();cur.msg="Restore revision";cur.rev=(cur.rev||1)+1;save();toast("Revision restored");location.hash=`#/r/${n}/wiki/${encodeURIComponent(page)}`});
+    return}
+  app.innerHTML=wrap(`<div class="bar"><h2 style="margin:0;font-weight:600">${esc(page)}</h2><span class="sp"></span><a class="btn" href="#/r/${n}/wiki/${encodeURIComponent(page)}?history">🕘 Revisions <span class="count">${(cur.hist||[]).length+1}</span></a><a class="btn" href="#/r/${n}/wiki/${encodeURIComponent(page)}?edit">✏ Edit</a></div>
+  <div class="mt" style="margin-bottom:10px">Last edited ${ago(cur.time)}${cur.msg?" · "+esc(cur.msg):""}</div><div class="box"><div class="md">${md(wl(cur.content),n)||'<i class="mt">This page is empty.</i>'}</div></div>`)}
+
+/* ---- insights ---- */
+function barChart(vals,labels,color){
+  const max=Math.max(1,...vals),w=vals.length,bw=520/w;
+  return`<svg viewBox="0 0 520 134" style="width:100%;height:auto"><line x1="0" y1="110.5" x2="520" y2="110.5" stroke="var(--border)"/>${vals.map((v,i)=>{const h=Math.round(v/max*100);return`<rect x="${(i*bw+2).toFixed(1)}" y="${110-h}" width="${(bw-4).toFixed(1)}" height="${h}" rx="2" fill="${color||"#2ea043"}"><title>${esc(labels[i])}: ${v}</title></rect>`}).join("")}<text x="0" y="128" font-size="10" fill="var(--muted)">${esc(labels[0])}</text><text x="520" y="128" font-size="10" text-anchor="end" fill="var(--muted)">${esc(labels[w-1])}</text><text x="520" y="9" font-size="10" text-anchor="end" fill="var(--muted)">max ${max}</text></svg>`}
+function insights(n,P){
+  const r=R(n),t=P.get("tab")||"pulse",days=+(P.get("d")||7),now=Date.now(),since=now-days*864e5,cs=allCommits(r);
+  const nav=[["pulse","Pulse"],["contributors","Contributors"],["commits","Commits"],["languages","Languages"]].map(([k,l])=>`<a class="${t==k?"on":""}" href="#/r/${n}/insights?tab=${k}">${l}</a>`).join("");
+  const W=7*864e5,weeks=[],wl=[];
+  for(let w=25;w>=0;w--){const e=now-w*W,s=e-W;weeks.push(cs.filter(c=>c.time>s&&c.time<=e).length);wl.push(new Date(e).toLocaleDateString(undefined,{month:"short",day:"numeric"}))}
+  const stat=(v,l,c)=>`<div class="stat"><b style="${c?"color:"+c:""}">${v}</b><span class="mt">${l}</span></div>`;
+  let body="";
+  if(t=="pulse"){
+    const inP=cs.filter(c=>c.time>=since),opened=r.issues.filter(i=>i.type=="issue"&&i.created>=since),prsO=r.issues.filter(i=>i.type=="pr"&&i.created>=since),merged=r.issues.filter(i=>i.type=="pr"&&i.state=="merged"&&i.mergedAt>=since);
+    let add=0,del=0;inP.forEach(c=>(c.changes||[]).forEach(x=>{add+=x.add;del+=x.del}));
+    body=`<div class="bar"><h3 style="margin:0">Pulse</h3><span class="sp"></span><select id="ind">${[7,30,90].map(d=>`<option value="${d}" ${d==days?"selected":""}>Last ${d} days</option>`).join("")}</select></div>
+    <div class="statg">${stat(merged.length,"Merged pull requests","#a371f7")}${stat(prsO.length,"Opened pull requests","#3fb950")}${stat(opened.length,"Opened issues","#3fb950")}${stat(inP.length,"Commits")}${stat("+"+add,"Additions","#3fb950")}${stat("−"+del,"Deletions","var(--danger)")}</div>
+    <div class="box"><h3>Merged pull requests</h3>${merged.map(i=>`<div class="ir">${icon(i)}<a href="#/r/${n}/pull/${i.n}">${esc(i.title)}</a><span class="mt">#${i.n}</span></div>`).join("")||'<div class="empty">None in this period.</div>'}</div>
+    <div class="box"><h3>Opened issues</h3>${opened.map(i=>`<div class="ir">${icon(i)}<a href="#/r/${n}/issues/${i.n}">${esc(i.title)}</a><span class="mt">#${i.n}</span></div>`).join("")||'<div class="empty">None in this period.</div>'}</div>`}
+  else if(t=="contributors"){
+    let add=0,del=0;cs.forEach(c=>(c.changes||[]).forEach(x=>{add+=x.add;del+=x.del}));
+    body=`<h3 style="margin:0 0 12px">Contributors</h3><div class="box"><div class="ir" style="display:block"><div style="display:flex;gap:10px;align-items:center">${avatarHTML(36)}<div><b>${esc(db.profile.username)}</b><div class="mt">${cs.length} commits · <span style="color:#3fb950">${add}++</span> <span style="color:var(--danger)">${del}--</span></div></div></div><div style="margin-top:12px">${barChart(weeks,wl)}</div></div></div>`}
+  else if(t=="commits"){
+    const dow=[0,0,0,0,0,0,0];cs.forEach(c=>dow[new Date(c.time).getDay()]++);
+    body=`<h3 style="margin:0 0 12px">Commit activity</h3><div class="box" style="padding:16px"><p class="mt" style="margin-top:0">Commits per week over the last 26 weeks</p>${barChart(weeks,wl)}</div>
+    <div class="box" style="padding:16px"><p class="mt" style="margin-top:0">Commits by day of week</p>${barChart(dow,["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"#388bfd")}</div>`}
+  else{
+    const ls=langStats(r.branches[r.default].files),tot=ls.reduce((a,x)=>a+x.v,0)||1;
+    body=`<h3 style="margin:0 0 12px">Languages</h3><div class="box" style="padding:16px">${ls.length?`<div class="lang" style="height:12px">${ls.map(x=>`<div style="width:${x.v/tot*100}%;background:${x.c}"></div>`).join("")}</div><table class="md" style="padding:0;width:100%;display:table">${ls.map(x=>`<tr><td><span class="dot" style="background:${x.c}"></span><b>${x.name}</b></td><td>${(x.v/tot*100).toFixed(1)}%</td><td>${size(x.v)}</td></tr>`).join("")}</table>`:'<div class="empty">No code yet.</div>'}</div>
+    <div class="statg">${stat(Object.keys(r.branches[r.default].files).length,"Files")}${stat(Object.keys(r.branches).length,"Branches")}${stat(cs.length,"Commits")}${stat(r.releases.length,"Releases")}</div>`}
+  app.innerHTML=head(n,"insights")+`<div class="wrap" style="max-width:1100px"><div class="insl"><nav class="sidenav">${nav}</nav><div>${body}</div></div></div>`;
+  if($("#ind"))$("#ind").onchange=()=>{location.hash=`#/r/${n}/insights?tab=pulse&d=${$("#ind").value}`}}
+
+/* ---- GitHub-style header: menu drawer, breadcrumb, create menu, issues / PR / bell buttons ---- */
+const HI={
+  plus:'<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v10M3 8h10"/></svg>',
+  caret:'<svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>',
+  issue:'<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/></svg>',
+  pr:'<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="4.5" cy="3.5" r="1.5"/><circle cx="4.5" cy="12.5" r="1.5"/><circle cx="11.5" cy="12.5" r="1.5"/><path d="M4.5 5v6M11.5 11V6.500a2 2 0 00-2-2H8M9.500 2.500L8 4.500l1.500 2"/></svg>',
+  bell:'<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.500 11h9l-1-1.500V6.500a3.500 3.500 0 00-7 0V9.500zM6.500 13a1.500 1.500 0 003 0"/></svg>'};
+function bellHTML(){
+  const u=unread(),m=(location.hash||"").match(/^#\/r\/([^\/?]+)/),rn=m?decodeURIComponent(m[1]):"",rp=rn&&db.repos[rn];
+  const repoItems=rp?`<div class="mh">This repository</div><a href="#/r/${encodeURIComponent(rn)}/issues/new">New issue</a><a href="#/r/${encodeURIComponent(rn)}/compare">New pull request</a><a href="${L.add(rn,rp.default,"")}">New file</a><div class="mh" style="border-top:1px solid var(--border);margin-top:4px">Your account</div>`:"";
+  return`<div style="position:relative"><button class="hbtn" id="plus" title="Create new…" aria-label="Create new">${HI.plus}${HI.caret}</button>
+  <div class="umenu" id="pm">${repoItems}<a href="#/new">New repository</a><a href="#/gists">New gist</a><a href="#/explore">Import / explore repositories</a></div></div>
+  <a class="hbtn hm" href="#/issues" title="Issues" aria-label="Issues">${HI.issue}</a>
+  <a class="hbtn hm" href="#/pulls" title="Pull requests" aria-label="Pull requests">${HI.pr}</a>
+  <a class="hbtn" href="#/notifications" title="Notifications" aria-label="Notifications" style="position:relative">${HI.bell}${u?`<span class="bdg">${u>99?"99+":u}</span>`:""}</a>`}
+
+function crumbHTML(){
+  const p=db.profile;if(!p)return"";
+  const seg=(location.hash||"#/").slice(2).split("?")[0].split("/").filter(Boolean).map(s=>{try{return decodeURIComponent(s)}catch(e){return s}});
+  const av=`<a class="cr" href="#/u/${encodeURIComponent(p.username)}" style="display:flex">${avatarHTML(20)}</a>`,sl='<span class="csl">/</span>';
+  if(seg[0]=="r"&&seg[1]){
+    const sub={issues:"Issues",pulls:"Pull requests",pull:"Pull requests",releases:"Releases",wiki:"Wiki",projects:"Projects",insights:"Insights",settings:"Settings",discussions:"Discussions",commits:"Commits",commit:"Commit",branches:"Branches",compare:"Compare",milestones:"Milestones",blob:"Code",tree:"Code",edit:"Edit",new:"New file"}[seg[2]];
+    return`${av}<a class="cr" href="#/u/${encodeURIComponent(p.username)}">${esc(p.username)}</a>${sl}<a class="cr b" href="#/r/${encodeURIComponent(seg[1])}">${esc(seg[1])}</a>${sub?sl+`<span class="cr">${sub}</span>`:""}`}
+  const t={"":"Dashboard",explore:"Explore",new:"New repository",stars:"Stars",gists:"Gists",search:"Search",settings:"Settings",about:"About Developer",notifications:"Notifications",issues:"Issues",pulls:"Pull requests",u:seg[1]||p.username}[seg[0]||""]||"Dashboard";
+  return`${av}${sl}<span class="cr b">${esc(t)}</span>`}
+
+function openDrawer(){
+  const p=db.profile;if(!p)return;
+  let oi=0,op=0;for(const r of Object.values(db.repos))for(const i of r.issues)if(i.state=="open")i.type=="pr"?op++:oi++;
+  const rs=Object.keys(db.repos).sort((a,b)=>db.repos[b].updated-db.repos[a].updated).slice(0,8),un=unread();
+  const nav=[["Home","#/",""],["Pull requests","#/pulls",op||""],["Issues","#/issues",oi||""],["Explore","#/explore",""],["Notifications","#/notifications",un||""],["★ Stars","#/stars",""],["Gists","#/gists",""],["👨‍💻 About Developer","#/about",""]];
+  $("#modal").innerHTML=`<div class="ov drw"><div class="drawer"><div class="dh"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="9" cy="25" r="3"/><circle cx="23" cy="12" r="3"/><path d="M9 10v12M23 15c0 5-6 5-12 8"/></svg><b>Gitora</b><span class="sp"></span><button class="btn" id="dx" aria-label="Close">✕</button></div>
+  ${nav.map(([l,h,c])=>`<a href="${h}"><span style="flex:1">${l}</span>${c?`<span class="count">${c}</span>`:""}</a>`).join("")}
+  <div class="dt">Top repositories <a href="#/new" class="btn green" style="padding:0 8px;min-height:0;font-size:12px">New</a></div>
+  ${rs.map(n=>`<a href="#/r/${encodeURIComponent(n)}">📁 <span style="flex:1;overflow:hidden;text-overflow:ellipsis">${esc(p.username)}/${esc(n)}</span></a>`).join("")||'<div class="mt" style="padding:6px 10px">No repositories yet</div>'}
+  <div class="dt" style="margin-top:12px">Account</div><a href="#/u/${encodeURIComponent(p.username)}">Your profile</a><a href="#/settings">Settings &amp; backup</a></div></div>`;
+  $("#dx").onclick=closeModal}
+document.addEventListener("click",e=>{const pm=$("#pm");if(pm&&!e.target.closest("#pm,#plus"))pm.classList.remove("open")},true);
+document.addEventListener("click",e=>{
+  if(e.target.closest("#plus")){const pm=$("#pm");if(pm)pm.classList.toggle("open");return}
+  if(e.target.closest("#pm a")){const pm=$("#pm");if(pm)pm.classList.remove("open");return}
+  if(e.target.closest("#hb")){openDrawer();return}
+  if(e.target.closest(".drawer a"))closeModal()});
+
+</script>
 <script>
 /* ================= storage ================= */
 let store={accounts:{},session:null},db={repos:{},profile:null},idb=null,ctx=null;
@@ -363,8 +716,8 @@ function migrate(){
   db.repos=db.repos||{};
   for(const r of Object.values(db.repos)){
     if(!r.branches){r.branches={main:{files:r.files||{},commits:r.commits||[]}};delete r.files;delete r.commits;r.default="main"}
-    r.issues=r.issues||[];r.nextNum=r.nextNum||1;r.topics=r.topics||[];r.releases=r.releases||[];r.license=r.license||"";r.starred=!!r.starred;r.private=!!r.private;r.watching=!!r.watching;
-    for(const b of Object.values(r.branches))for(const c of b.commits)c.id=c.id||rid();}}
+    r.issues=r.issues||[];r.nextNum=r.nextNum||1;r.topics=r.topics||[];r.releases=r.releases||[];r.projects=r.projects||[];r.milestones=r.milestones||[];r.wiki=r.wiki||{};r.license=r.license||"";r.starred=!!r.starred;r.private=!!r.private;r.watching=!!r.watching;
+    for(const b of Object.values(r.branches)){for(const c of b.commits)c.id=c.id||rid();if(!b.snap)b.snap=mkSnap(b.files)}}}
 
 /* ================= utils ================= */
 const $=s=>document.querySelector(s);
@@ -376,7 +729,7 @@ const isMD=p=>/\.(md|markdown)$/i.test(p);
 const R=n=>db.repos[n];
 const qs=o=>{const p=new URLSearchParams();for(const k in o)if(o[k])p.set(k,o[k]);const s=p.toString();return s?"?"+s:""};
 const L={tree:(n,b,d)=>`#/r/${n}/tree/${b}/${encodeURIComponent(d||"")}`,blob:(n,b,p)=>`#/r/${n}/blob/${b}/${encodeURIComponent(p)}`,edit:(n,b,p)=>`#/r/${n}/edit/${b}/${encodeURIComponent(p)}`,add:(n,b,d,f)=>`#/r/${n}/new/${b}/${encodeURIComponent(d||"")}${f?"?f="+f:""}`};
-function commit(r,br,msg){r.branches[br].commits.unshift({id:rid(),msg:msg||"Update files",time:Date.now()});for(const f of Object.values(r.branches[br].files))if(Date.now()-(f.updated||0)<5000)f.msg=msg||"Update files";r.updated=Date.now();save()}
+function commit(r,br,msg){r.branches[br].commits.unshift({id:rid(),msg:msg||"Update files",time:Date.now(),by:db.profile&&db.profile.username,changes:calcChanges(r,br)});for(const f of Object.values(r.branches[br].files))if(Date.now()-(f.updated||0)<5000)f.msg=msg||"Update files";r.updated=Date.now();save()}
 function dl(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click()}
 const sizeOf=f=>f.size||(f.content||"").length;
 
@@ -528,12 +881,12 @@ function avatarHTML(s){
   if(p.avatar)return`<img src="${p.avatar}" alt="" style="width:${s}px;height:${s}px;border-radius:50%;object-fit:cover;display:block;max-width:100%">`;
   let h=0;for(const c of p.username)h=(h*31+c.charCodeAt(0))%360;
   return`<div style="width:${s}px;height:${s}px;max-width:100%;aspect-ratio:1;border-radius:50%;background:linear-gradient(135deg,hsl(${h},70%,55%),hsl(${(h+50)%360},70%,42%));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:${Math.round(s*.45)}px">${esc(p.username[0].toUpperCase())}</div>`}
-function renderHeader(){
+function renderHeader(){setTimeout(()=>{const c=$("#crumb");if(c)c.innerHTML=crumbHTML()},0);
   const p=db.profile,el=$("#hdr");if(!el)return;
   document.body.classList.toggle("out",!p);if(!p){el.innerHTML='<a class="btn" href="#/signin">Sign in</a> <a class="btn green" href="#/signup">Sign up</a>';return}
-  el.innerHTML=`<div style="position:relative"><button id="avb" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:4px;color:#fff">${avatarHTML(28)}▾</button>
+  el.innerHTML=`${bellHTML()}<div style="position:relative"><button id="avb" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:4px;color:#fff">${avatarHTML(28)}▾</button>
   <div class="umenu" id="um"><div style="padding:8px 12px;border-bottom:1px solid var(--border)">Signed in as<br><b>${esc(p.username)}</b></div>
-  <a href="#/u/${esc(p.username)}">Your profile</a><a href="#/">Your repositories</a><a href="#/new">New repository</a><a href="#/stars">Your stars</a><a href="#/gists">Your gists</a><a href="#/settings">Settings &amp; backup</a><a href="#" id="thm">${themeLabel()}</a><a href="#" id="so" style="border-top:1px solid var(--border)">Sign out</a></div></div>`;
+  <a href="#/u/${esc(p.username)}">Your profile</a><a href="#/">Your repositories</a><a href="#/new">New repository</a><a href="#/stars">Your stars</a><a href="#/gists">Your gists</a><a href="#/settings">Settings &amp; backup</a><a href="#/about">About developer</a><a href="#" id="thm">${themeLabel()}</a><a href="#" id="so" style="border-top:1px solid var(--border)">Sign out</a></div></div>`;
   $("#avb").onclick=e=>{e.stopPropagation();$("#um").classList.toggle("open")};$("#so").onclick=e=>{e.preventDefault();signOut()};$("#thm").onclick=e=>{e.preventDefault();e.stopPropagation();cycleTheme();$("#thm").textContent=themeLabel()}}
 function resizeImg(file,cb){const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const s=256,c=document.createElement("canvas");c.width=c.height=s;const m=Math.min(im.width,im.height);c.getContext("2d").drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);cb(c.toDataURL("image/jpeg",.85))};im.src=fr.result};fr.readAsDataURL(file)}
 
@@ -546,11 +899,12 @@ function head(n,tab){
   const r=R(n),open=t=>r.issues.filter(i=>i.type==t&&i.state=="open").length;
   return`<div class="repohead"><div class="title">📁 <a href="#/u/${esc(db.profile.username)}">${esc(db.profile.username)}</a> / <a href="#/r/${n}"><b>${esc(n)}</b></a><span class="badge">${r.private?"🔒 Private":"Public"}</span>${r.forkOf?`<span class="mt">forked from ${esc(r.forkOf)}</span>`:""}<span class="sp"></span><button class="btn" data-watch="${esc(n)}">${r.watching?"👁 Watching":"👁 Watch"}</button><button class="btn" data-fork="${esc(n)}">⑂ Fork <span class="count">${r.forks||0}</span></button>
   <button class="btn" data-star="${esc(n)}">${r.starred?"★ Starred":"☆ Star"} <span class="count">${r.starred?1:0}</span></button></div>
-  <div class="tabs"><a class="${tab=="code"?"on":""}" href="#/r/${n}">&lt;&gt; Code</a>
+  ${r.archived?'<div class="note" style="margin:12px 0 0">📦 This repository has been archived by the owner.</div>':""}<div class="tabs"><a class="${tab=="code"?"on":""}" href="#/r/${n}">&lt;&gt; Code</a>
   <a class="${tab=="issues"?"on":""}" href="#/r/${n}/issues">● Issues <span class="count">${open("issue")}</span></a>
   <a class="${tab=="pulls"?"on":""}" href="#/r/${n}/pulls">⑂ Pull requests <span class="count">${open("pr")}</span></a>
   <a class="${tab=="releases"?"on":""}" href="#/r/${n}/releases">🏷 Releases <span class="count">${r.releases.length}</span></a>
-  <a class="${tab=="settings"?"on":""}" href="#/r/${n}/settings">⚙ Settings</a></div></div>`}
+  <a class="${tab=="wiki"?"on":""}" href="#/r/${n}/wiki">📖 Wiki</a><a class="${tab=="projects"?"on":""}" href="#/r/${n}/projects">▦ Projects <span class="count">${(r.projects||[]).length}</span></a><a class="${tab=="insights"?"on":""}" href="#/r/${n}/insights">📊 Insights</a>
+  <a class="${tab=="discussions"?"on":""}" href="#/r/${n}/discussions">💬 Discussions <span class="count">${(r.discussions||[]).length}</span></a><a class="${tab=="settings"?"on":""}" href="#/r/${n}/settings">⚙ Settings</a></div></div>`}
 function branchSelect(n,br,kind,path){
   const r=R(n);
   return`<select id="brsel" data-n="${n}" data-k="${kind}" data-p="${esc(path||"")}">${Object.keys(r.branches).map(b=>`<option ${b==br?"selected":""}>${esc(b)}</option>`).join("")}<option value="__new">➕ New branch…</option></select>`}
@@ -559,7 +913,7 @@ function mkBranch(r,name,from){
   if(r.branches[name])return"That branch already exists";
   const src=r.branches[from];
   r.branches[name]={files:{...src.files},commits:[{id:rid(),msg:`Created branch ${name}`,time:Date.now()},...src.commits]};
-  r.updated=Date.now();save();return""}
+  r.branches[name].snap=mkSnap(r.branches[name].files);r.updated=Date.now();save();return""}
 function listDir(files,dir){
   const folders=new Map(),out=[];
   for(const [p,f] of Object.entries(files)){
@@ -621,7 +975,7 @@ function auth(up){
 function forkRepo(n){
   const src=R(n);let nn=n+"-fork",i=2;while(db.repos[nn])nn=n+"-fork"+i++;
   const c=JSON.parse(JSON.stringify(src));
-  Object.assign(c,{forkOf:n,starred:false,watching:false,forks:0,issues:[],nextNum:1,releases:[],created:Date.now(),updated:Date.now()});
+  Object.assign(c,{forkOf:n,starred:false,watching:false,forks:0,issues:[],nextNum:1,releases:[],projects:[],milestones:[],created:Date.now(),updated:Date.now()});
   db.repos[nn]=c;src.forks=(src.forks||0)+1;save();toast("Forked to "+nn);location.hash="#/r/"+nn}
 
 function stars(){
@@ -698,7 +1052,7 @@ function newRepo(){
     const files={};
     if($("#rr").checked)files["README.md"]={text:true,content:`# ${n}\n\n${$("#rd").value.trim()||"Project description goes here."}\n`,size:0,updated:Date.now()};
     db.repos[n]={private:!!$("#rv").value,desc:$("#rd").value.trim(),topics:[],license:$("#rl").value,starred:false,created:Date.now(),updated:Date.now(),default:"main",
-      branches:{main:{files,commits:[{id:rid(),msg:"Initial commit",time:Date.now()}]}},issues:[],nextNum:1,releases:[]};
+      branches:{main:{files,commits:[{id:rid(),msg:"Initial commit",time:Date.now()}]}},issues:[],nextNum:1,releases:[],projects:[],milestones:[],wiki:{}};baseline(db.repos[n]);
     save();location.hash=`#/r/${n}`}}
 
 function aside(r,b){
@@ -720,7 +1074,7 @@ function tree(n,br,dir){
   const last=b.commits[0],d=br!==r.default?branchDiff(r,r.default,br):[];
   app.innerHTML=head(n,"code")+`<div class="wrap" style="max-width:1280px"><div class="two"><div>
   <div class="bar">${branchSelect(n,br,"tree",dir)}<a href="#/r/${n}/branches"><b>${Object.keys(r.branches).length}</b> branches</a><span class="sp"></span>
-    <button class="btn" id="gtf">Go to file <kbd>t</kbd></button>
+    <input type="text" id="rsq" placeholder="Search code…" style="width:150px"><button class="btn" id="gtf">Go to file <kbd>t</kbd></button>
     <div style="position:relative"><button class="btn green" id="codebtn">&lt;&gt; Code ▾</button><div class="menu" id="cmenu"><b>Clone</b>
     <p class="mt" style="margin:6px 0">HTTPS</p><input type="text" readonly id="curl" value="https://gitora.example/${esc(db.profile.username)}/${esc(n)}.git">
     <div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="ccopy">Copy URL</button><button class="btn" id="czip">⬇ Download ZIP</button></div></div></div></div>
@@ -730,7 +1084,7 @@ function tree(n,br,dir){
     <label class="btn" style="display:inline-flex;margin:0 4px">Choose files<input type="file" id="pf" multiple hidden></label>
     <label class="btn" style="display:inline-flex;margin:0 4px">Upload folder<input type="file" id="pd" webkitdirectory hidden></label>
     <a class="btn" href="${L.add(n,br,dir)}">+ Create new file</a></div>
-  <div class="box"><div class="commit"><span style="display:flex">${avatarHTML(20)}</span><b>${esc(db.profile.username)}</b><span class="msg">${esc(last?last.msg:"")}</span><span class="mt">${last?ago(last.time):""}</span><a href="#/r/${n}/commits/${br}">🕘 ${b.commits.length} commits</a></div>
+  <div class="box"><div class="commit"><span style="display:flex">${avatarHTML(20)}</span><b>${esc(db.profile.username)}</b><a class="msg" style="color:var(--muted)" href="${last?`#/r/${n}/commit/${last.id}`:"#"}">${esc(last?last.msg:"")}</a><span class="mt">${last?ago(last.time):""}</span><a href="#/r/${n}/commits/${br}">🕘 ${b.commits.length} commits</a></div>
     ${dir?`<div class="row"><span>📁</span><a href="${L.tree(n,br,parts.length>1?parts.slice(0,-1).join("/")+"/":"")}">..</a><span></span><span></span></div>`:""}
     ${folders.map(([nm,t])=>`<div class="row"><span>📁</span><a href="${L.tree(n,br,dir+nm+"/")}">${esc(nm)}</a><span class="m"></span><span class="t">${t?ago(t):""}</span></div>`).join("")}
     ${files.map(([nm,f])=>`<div class="row"><span>📄</span><a href="${L.blob(n,br,dir+nm)}">${esc(nm)}</a><span class="m" title="${size(sizeOf(f))}">${esc(f.msg||size(sizeOf(f)))}</span><span class="t">${ago(f.updated)}</span></div>`).join("")}
@@ -739,7 +1093,7 @@ function tree(n,br,dir){
    :`<div class="box"><div class="empty"><p>Help people understand your project.</p><a class="btn green" href="${L.add(n,br,dir,"README.md")}">Add a README</a></div></div>`}
   </div>${aside(r,b)}</div></div>`;
   bindBranch();
-  $("#gtf").onclick=openFinder;
+  $("#gtf").onclick=openFinder;$("#rsq").onkeydown=e=>{if(e.key=="Enter"&&e.target.value.trim())location.hash="#/search?q="+encodeURIComponent(e.target.value.trim())+"&t=code"};
   $("#codebtn").onclick=e=>{e.stopPropagation();$("#cmenu").classList.toggle("open")};
   $("#cmenu").onclick=e=>e.stopPropagation();
   $("#ccopy").onclick=()=>{try{navigator.clipboard.writeText($("#curl").value)}catch(e){$("#curl").select()}toast("Copied")};
@@ -782,10 +1136,12 @@ function blob(n,br,path,P){
   <div class="box"><h3>${esc(path.split("/").pop())} <span class="badge">${f.text?f.content.split("\n").length+" lines · ":""}${size(sizeOf(f))}</span><span class="sp"></span>
     ${f.text&&isMD(path)?`<a class="btn" href="#/r/${n}/blob/${br}/${encodeURIComponent(path)}${showCode?"":"?code"}">${showCode?"Preview":"Code"}</a>`:""}
     ${f.text?`<button class="btn" id="cp">Copy</button><a class="btn" href="${L.edit(n,br,path)}">✏ Edit</a>`:""}
-    <button class="btn" id="dl">⬇ Download</button><button class="btn danger" id="del">🗑 Delete</button></h3>${body}</div>
+    <button class="btn" id="raw">Raw</button><button class="btn" id="rn2">Rename</button><button class="btn" id="dl">⬇ Download</button><button class="btn danger" id="del">🗑 Delete</button></h3>${body}</div>
   <a href="${L.tree(n,br,dir)}">← Back to folder</a></div>`;
   bindBranch();
   if($("#cp"))$("#cp").onclick=()=>{try{navigator.clipboard.writeText(f.content);toast("Copied")}catch(e){toast("Copy failed")}};
+  $("#raw").onclick=()=>{const u=URL.createObjectURL(f.text?new Blob([f.content],{type:"text/plain;charset=utf-8"}):new Blob([bytes||fromDataURL(f.content)],{type:f.mime||"application/octet-stream"}));window.open(u,"_blank")};
+  $("#rn2").onclick=()=>{const np=prompt("Rename / move file to:",path);if(!np||!np.trim()||np.trim()===path)return;const q=np.trim(),fs=r.branches[br].files;if(fs[q]&&!confirm(q+" already exists. Overwrite?"))return;fs[q]=Object.assign({},f,{updated:Date.now()});delete fs[path];commit(r,br,`Rename ${path} to ${q}`);toast("File renamed");location.hash=L.blob(n,br,q)};
   $("#dl").onclick=()=>{if(f.text)dl(new Blob([f.content],{type:"text/plain"}),path.split("/").pop());else{const a=document.createElement("a");a.href=f.content;a.download=path.split("/").pop();a.click()}};
   $("#del").onclick=()=>{if(!confirm("Delete "+path+"?"))return;delete r.branches[br].files[path];commit(r,br,"Delete "+path);toast("Deleted");location.hash=L.tree(n,br,dir)}}
 
@@ -812,7 +1168,7 @@ function commits(n,br){
   const r=R(n);if(!r.branches[br])return notFound();ctx={n,br};
   const cs=r.branches[br].commits;
   app.innerHTML=head(n,"code")+`<div class="wrap"><div class="bar">${branchSelect(n,br,"tree","")}<h3 style="margin:0">Commits</h3></div>
-  <div class="box">${cs.map(c=>`<div class="commit"><span style="font-family:monospace;color:var(--link)">${c.id.slice(0,7)}</span><b style="font-weight:500">${esc(c.msg)}</b><span class="msg"></span><span class="mt">${ago(c.time)}</span></div>`).join("")}</div></div>`;
+  <div class="box">${cs.map(c=>`<div class="commit"><a style="font-family:monospace" href="#/r/${n}/commit/${c.id}">${c.id.slice(0,7)}</a><a href="#/r/${n}/commit/${c.id}" style="color:var(--text);font-weight:500">${esc(c.msg)}</a><span class="msg"></span><span class="mt">${ago(c.time)}</span></div>`).join("")}</div></div>`;
   bindBranch()}
 
 function branches(n){
@@ -830,28 +1186,28 @@ function issueList(n,type){
   const r=R(n),P=new URLSearchParams((location.hash.split("?")[1])||"");
   const st=P.get("state")||"open",q=(P.get("q")||"").toLowerCase(),lb=P.get("label")||"";
   const all=r.issues.filter(i=>i.type==type),oc=all.filter(i=>i.state=="open").length;
-  const list=all.filter(i=>(st=="open"?i.state=="open":i.state!="open")&&(!q||(i.title+i.body).toLowerCase().includes(q))&&(!lb||i.labels.includes(lb))).sort((a,b)=>b.n-a.n);
+  const list=all.filter(i=>(st=="open"?i.state=="open":i.state!="open")&&(!q||(i.title+i.body).toLowerCase().includes(q))&&(!lb||i.labels.includes(lb))&&(!P.get("milestone")||i.milestone==P.get("milestone"))).sort((a,b)=>{const so=P.get("sort")||"new";return so=="old"?a.n-b.n:so=="comments"?b.comments.length-a.comments.length:b.n-a.n});
   const base=`#/r/${n}/${type=="pr"?"pulls":"issues"}`;
   app.innerHTML=head(n,type=="pr"?"pulls":"issues")+`<div class="wrap"><div class="bar"><input type="text" id="iq" value="${esc(P.get("q")||"")}" placeholder="Search ${type=="pr"?"pull requests":"issues"}…" style="flex:1;min-width:200px">
-  <select id="il"><option value="">All labels</option>${Object.keys(LABELS).map(l=>`<option ${l==lb?"selected":""}>${l}</option>`).join("")}</select>
+  <a class="btn" href="#/r/${n}/milestones">🎯 Milestones <span class="count">${(r.milestones||[]).filter(m=>m.state=="open").length}</span></a><select id="is2"><option value="new">Newest</option><option value="old" ${P.get("sort")=="old"?"selected":""}>Oldest</option><option value="comments" ${P.get("sort")=="comments"?"selected":""}>Most commented</option></select><select id="il"><option value="">All labels</option>${Object.keys(LABELS).map(l=>`<option ${l==lb?"selected":""}>${l}</option>`).join("")}</select>
   <a class="btn green" href="${type=="pr"?`#/r/${n}/compare`:`#/r/${n}/issues/new`}">New ${type=="pr"?"pull request":"issue"}</a></div>
   <div class="box"><h3><a href="${base}${qs({state:"open",q:P.get("q"),label:lb})}" style="color:var(--text);${st=="open"?"font-weight:700":""}">● ${oc} Open</a><a href="${base}${qs({state:"closed",q:P.get("q"),label:lb})}" style="color:var(--text);${st!="open"?"font-weight:700":""}">✓ ${all.length-oc} Closed</a></h3>
   ${list.map(i=>`<div class="ir">${icon(i)}<div style="flex:1"><a class="tt" href="#/r/${n}/${type=="pr"?"pull":"issues"}/${i.n}">${esc(i.title)}</a>${i.labels.map(chip).join("")}
    <div class="mt">#${i.n} ${i.state=="merged"?"merged":i.state=="open"?"opened":"closed"} ${ago(i.created)} by ${esc(i.author)}${type=="pr"?` · ${esc(i.head)} → ${esc(i.base)}`:""}</div></div>${i.comments.length?`<span class="mt">💬 ${i.comments.length}</span>`:""}</div>`).join("")
    ||`<div class="empty">${all.length?"No results match your filters.":type=="pr"?"No pull requests yet. Create a branch, change some files, then open one.":"No issues yet. Track bugs and ideas here."}</div>`}</div></div>`;
-  const go=()=>{location.hash=base+qs({state:st,q:$("#iq").value,label:$("#il").value})};
-  $("#iq").onkeydown=e=>{if(e.key=="Enter")go()};$("#il").onchange=go}
+  const go=()=>{location.hash=base+qs({state:st,q:$("#iq").value,label:$("#il").value,sort:$("#is2").value,milestone:P.get("milestone")})};
+  $("#iq").onkeydown=e=>{if(e.key=="Enter")go()};$("#il").onchange=go;$("#is2").onchange=go}
 
 function newIssue(n){
   const r=R(n);
   app.innerHTML=head(n,"issues")+`<div class="wrap" style="max-width:900px"><h3>New issue</h3>
-  <input type="text" id="it" placeholder="Title"><div style="height:10px"></div>${mdBox("ib","","Leave a comment (Markdown supported)",180)}
+  <div class="bar" style="margin-bottom:10px"><span class="mt">Template:</span><button type="button" class="btn" data-tpl="bug" data-lb="bug" data-pre="[Bug] ">Bug report</button><button type="button" class="btn" data-tpl="feat" data-lb="enhancement" data-pre="[Feature] ">Feature request</button><button type="button" class="btn" data-tpl="q" data-lb="question" data-pre="[Question] ">Question</button></div><input type="text" id="it" placeholder="Title"><div style="height:10px"></div>${mdBox("ib","","Leave a comment (Markdown supported)",180)}
   <label>Labels</label><div>${Object.keys(LABELS).map(l=>`<label style="display:inline-flex;gap:4px;margin:0 12px 6px 0;font-weight:400"><input type="checkbox" value="${l}" class="lbc"> ${chip(l)}</label>`).join("")}</div>
-  <p><button class="btn green" id="is">Submit new issue</button> <a class="btn" href="#/r/${n}/issues">Cancel</a></p></div>`;
+  <label>Milestone</label><select id="ms"><option value="">No milestone</option>${(r.milestones||[]).filter(m=>m.state=="open").map(m=>`<option value="${m.id}">${esc(m.title)}</option>`).join("")}</select><label>Assignee</label><select id="as"><option value="">No one</option><option>${esc(db.profile.username)}</option></select><p><button class="btn green" id="is">Submit new issue</button> <a class="btn" href="#/r/${n}/issues">Cancel</a></p></div>`;
   bindMd("ib",n);
   $("#is").onclick=()=>{
     const t=$("#it").value.trim();if(!t)return toast("Title is required");
-    const it={n:r.nextNum++,type:"issue",title:t,body:$("#ib").value,state:"open",labels:[...document.querySelectorAll(".lbc:checked")].map(x=>x.value),created:Date.now(),author:db.profile.username,comments:[]};
+    const it={n:r.nextNum++,type:"issue",title:t,body:$("#ib").value,state:"open",labels:[...document.querySelectorAll(".lbc:checked")].map(x=>x.value),milestone:$("#ms").value,assignee:$("#as").value,created:Date.now(),author:db.profile.username,comments:[]};
     r.issues.push(it);r.updated=Date.now();save();location.hash=`#/r/${n}/issues/${it.n}`}}
 
 function compare(n,P){
@@ -880,23 +1236,24 @@ function thread(n,num,tab){
   const pr=it.type=="pr",tabk=pr?"pulls":"issues";
   const hasB=pr&&r.branches[it.base]&&r.branches[it.head];
   const d=pr&&it.state!="merged"&&hasB?branchDiff(r,it.base,it.head):(pr&&it.files)||[];
-  const cm=(a,t,body)=>`<div class="cmt"><div class="ch"><b>${esc(a)}</b> commented ${ago(t)}</div><div class="md sm">${md(body,n)||'<i class="mt">No description provided.</i>'}</div></div>`;
+  const cm=(a,t,body,key)=>`<div class="cmt"><div class="ch"><b>${esc(a)}</b> commented ${ago(t)}</div><div class="md sm">${md(body,n)||'<i class="mt">No description provided.</i>'}</div>${rxBar(n,num,it,key)}</div>`;
   let merge="";
   if(pr){
     if(it.state=="merged")merge=`<div class="merge done"><b style="color:var(--purple)">⑂ Pull request merged</b><div class="mt">${esc(it.head)} was merged into ${esc(it.base)} ${ago(it.mergedAt)}.</div>${r.branches[it.head]&&it.head!==r.default?`<p style="margin:10px 0 0"><button class="btn" id="delb">Delete branch</button></p>`:""}</div>`;
     else if(it.state=="open"){
       if(!hasB)merge=`<div class="note">One of the branches no longer exists, so this pull request can't be merged.</div>`;
       else if(!d.length)merge=`<div class="note">There are no changes to merge — the branches are identical.</div>`;
-      else merge=`<div class="merge"><b style="color:#3fb950">✓ This branch has no conflicts with the base branch</b><div class="mt">Merging will copy ${d.length} file change${d.length>1?"s":""} from ${esc(it.head)} into ${esc(it.base)}.</div><p style="margin:10px 0 0"><button class="btn green" id="mrg">Merge pull request</button></p></div>`}}
-  const convo=`${cm(it.author,it.created,it.body)}${it.comments.map(c=>cm(c.author,c.time,c.body)).join("")}${merge}
+      else merge=`<div class="merge"><b style="color:#3fb950">✓ This branch has no conflicts with the base branch</b><div class="mt">Merging will copy ${d.length} file change${d.length>1?"s":""} from ${esc(it.head)} into ${esc(it.base)}.</div><p style="margin:10px 0 0;display:flex;gap:8px;flex-wrap:wrap"><select id="mm"><option value="merge">Create a merge commit</option><option value="squash">Squash and merge</option><option value="rebase">Rebase and merge</option></select><button class="btn green" id="mrg">Merge pull request</button></p></div>`}}
+  const convo=`${cm(it.author,it.created,it.body,"b")}${it.comments.map((c,ci)=>cm(c.author,c.time,c.body,"c"+ci)).join("")}${merge}
   <div class="box" style="padding:12px;margin-top:8px">${mdBox("cb","","Leave a comment",110)}<p style="margin:12px 0 0;display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="cmb">Comment</button>
   ${it.state=="open"?`<button class="btn" id="cls">${pr?"Close pull request":"Close issue"}</button>`:it.state=="closed"?`<button class="btn" id="opn">Reopen</button>`:""}</p></div>`;
   const files=!pr?"":it.state=="merged"?`<div class="box">${(it.files||[]).map(x=>`<div class="ir"><span class="badge">${x.t}</span><span>${esc(x.p)}</span></div>`).join("")||'<div class="empty">No file list recorded.</div>'}</div>`:(hasB&&d.length?diffHTML(r,it.base,it.head,d):'<div class="empty">No changes.</div>');
-  app.innerHTML=head(n,tabk)+`<div class="wrap" style="max-width:1100px"><h2 style="margin:0 0 8px">${esc(it.title)} <span class="num">#${num}</span></h2>
+  app.innerHTML=head(n,tabk)+`<div class="wrap" style="max-width:1100px"><h2 style="margin:0 0 8px">${esc(it.title)} <span class="num">#${num}</span> <button class="btn" data-edit="${n}|${num}" style="vertical-align:middle;margin-left:6px">✏ Edit</button></h2>
   <div class="bar">${stBadge(it)}<span class="mt"><b style="color:var(--text)">${esc(it.author)}</b> ${pr?`wants to merge <code>${esc(it.head)}</code> into <code>${esc(it.base)}</code>`:"opened this issue"} ${ago(it.created)} · ${it.comments.length} comment${it.comments.length!=1?"s":""}</span></div>
   ${pr?`<div class="tabs" style="margin:0 0 16px;border-bottom:1px solid var(--border)"><a class="${tab=="conv"?"on":""}" href="#/r/${n}/pull/${num}">Conversation</a><a class="${tab=="files"?"on":""}" href="#/r/${n}/pull/${num}/files">Files changed <span class="count">${d.length}</span></a></div>`:""}
   <div class="two"><div>${tab=="files"?files:convo}</div>
-  <aside><section><h4>Labels</h4>${Object.keys(LABELS).map(l=>`<label style="display:flex;gap:6px;margin:4px 0;font-weight:400"><input type="checkbox" class="lbx" value="${l}" ${it.labels.includes(l)?"checked":""}> ${chip(l)}</label>`).join("")}</section>
+  <aside><section><h4>Assignees</h4><select class="sel2" data-f="assignee" data-n="${n}" data-num="${num}" style="width:100%"><option value="">No one</option><option ${it.assignee==db.profile.username?"selected":""}>${esc(db.profile.username)}</option></select></section>
+  <section><h4>Milestone</h4><select class="sel2" data-f="milestone" data-n="${n}" data-num="${num}" style="width:100%"><option value="">No milestone</option>${(r.milestones||[]).map(m=>`<option value="${m.id}" ${it.milestone==m.id?"selected":""}>${esc(m.title)}</option>`).join("")}</select></section><section><h4>Labels</h4>${Object.keys(LABELS).map(l=>`<label style="display:flex;gap:6px;margin:4px 0;font-weight:400"><input type="checkbox" class="lbx" value="${l}" ${it.labels.includes(l)?"checked":""}> ${chip(l)}</label>`).join("")}</section>
   <section style="border:0"><h4>Participants</h4><span style="display:flex">${avatarHTML(24)}</span></section></aside></div></div>`;
   if(tab!="files")bindMd("cb",n);
   document.querySelectorAll(".lbx").forEach(x=>x.onchange=()=>{it.labels=[...document.querySelectorAll(".lbx:checked")].map(y=>y.value);save()});
@@ -909,7 +1266,7 @@ function thread(n,num,tab){
     const B=r.branches[it.base].files,H=r.branches[it.head].files;
     for(const x of d){if(x.t=="deleted")delete B[x.p];else B[x.p]=H[x.p]}
     it.files=d.map(x=>({p:x.p,t:x.t}));it.mergedAt=Date.now();it.state="merged";
-    commit(r,it.base,`Merge pull request #${num} from ${it.head}`);toast("Pull request merged");route()};
+    const mm=($("#mm")||{}).value||"merge";it.method=mm;commit(r,it.base,mm=="squash"?`${it.title} (#${num})`:mm=="rebase"?`Rebase and merge: ${it.title} (#${num})`:`Merge pull request #${num} from ${it.head}`);toast("Pull request merged");route()};
   if($("#delb"))$("#delb").onclick=()=>{if(confirm("Delete branch "+it.head+"?")){delete r.branches[it.head];save();route()}}}
 
 function releases(n){
@@ -931,10 +1288,10 @@ function repoSettings(n){
   <label>License</label><select id="sl">${["","MIT","Apache-2.0","GPL-3.0","BSD-3-Clause"].map(l=>`<option value="${l}" ${l==r.license?"selected":""}>${l||"None"}</option>`).join("")}</select>
   <label>Default branch</label><select id="sb">${Object.keys(r.branches).map(b=>`<option ${b==r.default?"selected":""}>${esc(b)}</option>`).join("")}</select>
   <label>Visibility</label><select id="svis"><option value="">Public</option><option value="1" ${r.private?"selected":""}>Private</option></select>
-  <label>Repository name</label><input type="text" id="srn" value="${esc(n)}">
+  <label style="display:flex;gap:6px;font-weight:400"><input type="checkbox" id="spin" ${r.pinned?"checked":""} style="width:auto"> 📌 Pin to my profile</label><label style="display:flex;gap:6px;font-weight:400"><input type="checkbox" id="sarc" ${r.archived?"checked":""} style="width:auto"> 📦 Archive this repository</label><label>Repository name</label><input type="text" id="srn" value="${esc(n)}">
   <p><button class="btn green" id="ss">Save changes</button></p><hr style="border-color:var(--border);margin:24px 0">
   <h3 style="color:var(--danger)">Danger zone</h3><button class="btn danger" id="dr">Delete this repository</button></div>`;
-  $("#ss").onclick=()=>{r.desc=$("#sd").value.trim();r.topics=$("#st").value.split(",").map(x=>x.trim().toLowerCase()).filter(Boolean);r.license=$("#sl").value;r.default=$("#sb").value;r.private=!!$("#svis").value;const nn=$("#srn").value.trim();if(nn&&nn!==n){if(!/^[\w.-]+$/.test(nn)||db.repos[nn])return toast("Invalid or taken name");db.repos[nn]=r;delete db.repos[n];save();toast("Renamed");location.hash="#/r/"+nn+"/settings";return}save();toast("Saved")};
+  $("#ss").onclick=()=>{r.desc=$("#sd").value.trim();r.topics=$("#st").value.split(",").map(x=>x.trim().toLowerCase()).filter(Boolean);r.license=$("#sl").value;r.default=$("#sb").value;r.private=!!$("#svis").value;r.pinned=$("#spin").checked;r.archived=$("#sarc").checked;const nn=$("#srn").value.trim();if(nn&&nn!==n){if(!/^[\w.-]+$/.test(nn)||db.repos[nn])return toast("Invalid or taken name");db.repos[nn]=r;delete db.repos[n];save();toast("Renamed");location.hash="#/r/"+nn+"/settings";return}save();toast("Saved")};
   $("#dr").onclick=()=>{if(prompt(`Type "${n}" to confirm deletion`)===n){delete db.repos[n];save();location.hash="#/"}}}
 
 function profile(u){
@@ -963,7 +1320,7 @@ function profile(u){
     ${p.location?`<div class="meta">📍 ${esc(p.location)}</div>`:""}${web?`<div class="meta">🔗 <a href="${esc(web)}" target="_blank" rel="noopener">${esc(p.website)}</a></div>`:""}
     <div class="meta">📅 Joined ${new Date(p.joined).toLocaleDateString(undefined,{month:"long",year:"numeric"})}</div></div>
   <div>${rk?`<div class="box"><h3>${esc(p.username)} / README.md<span class="sp"></span><a class="btn" href="${L.edit(p.username,pr0.default,rk)}">✏ Edit</a></h3><div class="md">${md(pr0.branches[pr0.default].files[rk].content,p.username)}</div></div>`:`<div class="note">💡 Create a repository named <b>${esc(p.username)}</b> with a README to show a profile README here.</div>`}
-    <div class="bar"><h3 style="margin:0">Repositories</h3><span class="sp"></span><input type="text" id="pf2" placeholder="Find a repository…" style="width:220px"><a class="btn green" href="#/new">New</a></div>
+    ${names.some(n=>R(n).pinned)?`<h3>📌 Pinned</h3><div class="grid" style="margin-bottom:20px">${names.filter(n=>R(n).pinned).map(repoCard).join("")}</div>`:""}<div class="bar"><h3 style="margin:0">Repositories</h3><span class="sp"></span><input type="text" id="pf2" placeholder="Find a repository…" style="width:220px"><a class="btn green" href="#/new">New</a></div>
     <div class="grid" id="pr">${names.map(repoCard).join("")||'<div class="empty" style="grid-column:1/-1">No repositories yet.</div>'}</div>
     ${starred.length?`<h3 style="margin-top:24px">Starred</h3><div class="grid">${starred.map(repoCard).join("")}</div>`:""}
     <div class="box" style="margin-top:24px"><h3>${yr} contributions in the last year</h3><div style="padding:12px 16px"><div class="graph">${cells}</div>
@@ -1017,6 +1374,58 @@ document.addEventListener("keydown",e=>{
   if(!typing&&!e.metaKey&&!e.ctrlKey){if(e.key=="/"){e.preventDefault();$("#gs").focus()}else if(e.key=="t"&&ctx){e.preventDefault();openFinder()}}});
 $("#gs").onkeydown=e=>{if(e.key=="Enter"&&e.target.value.trim()){location.hash="#/search?q="+encodeURIComponent(e.target.value.trim());e.target.blur()}};
 
+
+
+/* ================= Discussions ================= */
+function discussions(n,id){
+  const r=R(n);r.discussions=r.discussions||[];const D=r.discussions,CATS=["💡 Ideas","🙏 Q&A","📣 Announcements","🙌 Show and tell","💬 General"];
+  const d=id&&id!="new"?D.find(x=>x.id==id):null;if(id&&id!="new"&&!d)return notFound();
+  const base=`#/r/${n}/discussions`;let b;
+  if(id=="new")b=`<h3>New discussion</h3><label>Category</label><select id="dc">${CATS.map(c=>`<option>${c}</option>`).join("")}</select><label>Title</label><input type="text" id="dt">${mdBox("db","","Start a discussion (Markdown supported)",160)}<p><button class="btn green" id="dp">Start discussion</button> <a class="btn" href="${base}">Cancel</a></p>`;
+  else if(d)b=`<h2 style="margin:0 0 8px">${esc(d.title)}</h2><div class="bar"><span class="badge">${esc(d.cat)}</span>${d.answer!=null?'<span class="badge" style="color:#3fb950;border-color:#3fb950">✓ Answered</span>':""}<span class="mt"><b style="color:var(--text)">${esc(d.author)}</b> started this ${ago(d.time)}</span><span class="sp"></span><button class="btn" id="up">${d.votes?"▲ Upvoted":"△ Upvote"}</button><button class="btn danger" id="ddel">Delete</button></div>
+    <div class="cmt"><div class="md sm">${md(d.body,n)}</div></div>
+    ${d.comments.map((c,i)=>`<div class="cmt" style="${d.answer===i?"border-color:#3fb950":""}"><div class="ch"><b>${esc(c.author)}</b> replied ${ago(c.time)}${d.answer===i?' · <b style="color:#3fb950">✓ Answer</b>':""}<span class="sp"></span>${d.cat.includes("Q&A")?`<button class="btn" data-ans="${i}">${d.answer===i?"Unmark answer":"Mark as answer"}</button>`:""}</div><div class="md sm">${md(c.body,n)}</div></div>`).join("")}
+    <div class="box" style="padding:12px;margin-top:8px">${mdBox("dcb","","Write a reply",110)}<p style="margin:12px 0 0"><button class="btn green" id="dcm">Comment</button></p></div>`;
+  else b=`<div class="bar"><h3 style="margin:0">Discussions</h3><span class="sp"></span><a class="btn green" href="${base}/new">New discussion</a></div><div class="box">${D.slice().reverse().map(x=>`<div class="ir"><span style="font-size:18px">${x.cat.split(" ")[0]}</span><div style="flex:1"><a class="tt" href="${base}/${x.id}">${esc(x.title)}</a>${x.answer!=null?' <span class="badge" style="color:#3fb950;border-color:#3fb950">✓ Answered</span>':""}<div class="mt">${esc(x.cat.slice(2))} · ${esc(x.author)} · ${ago(x.time)}</div></div><span class="mt">${x.votes?"▲ 1 · ":""}💬 ${x.comments.length}</span></div>`).join("")||'<div class="empty">No discussions yet. Ask a question or share an idea.</div>'}</div>`;
+  app.innerHTML=head(n,"discussions")+`<div class="wrap" style="max-width:900px">${b}</div>`;
+  if(id=="new"){bindMd("db",n);$("#dp").onclick=()=>{const t=$("#dt").value.trim();if(!t)return toast("Title is required");const x={id:rid(),title:t,body:$("#db").value,cat:$("#dc").value,author:db.profile.username,time:Date.now(),votes:0,comments:[],answer:null};D.push(x);save();location.hash=`${base}/${x.id}`}}
+  else if(d){bindMd("dcb",n);
+    $("#up").onclick=()=>{d.votes=d.votes?0:1;save();route()};
+    $("#ddel").onclick=()=>{if(confirm("Delete this discussion?")){D.splice(D.indexOf(d),1);save();location.hash=base}};
+    $("#dcm").onclick=()=>{const t=$("#dcb").value.trim();if(!t)return toast("Write a reply first");d.comments.push({author:db.profile.username,body:t,time:Date.now()});save();route()};
+    document.querySelectorAll("[data-ans]").forEach(x=>x.onclick=()=>{const i=+x.dataset.ans;d.answer=d.answer===i?null:i;save();route()})}}
+
+/* ================= About developer ================= */
+function aboutDev(){
+  const gh="https://github.com/abhinavmaurya12";
+  const LINKEDIN="https://www.linkedin.com/in/abhinavmaurya1/",INSTAGRAM="https://www.instagram.com/_abhinav_830_",LINKFORGE="https://abhinavmaurya12.github.io/LinkForge/"; /* paste your LinkedIn / Instagram profile URLs between the quotes */
+  const soc=(u,ic,l)=>u?`<a class="btn" href="${u}" target="_blank" rel="noopener noreferrer">${ic} ${l}</a>`:`<a class="btn" href="#" onclick="toast('${l} link not added yet');return false">${ic} ${l}</a>`;
+  app.innerHTML=`<div class="wrap" style="max-width:860px"><div class="box"><div class="md" style="text-align:center;padding:32px 24px">
+  <img src="${gh}.png?size=240" alt="Abhinav Maurya" width="120" height="120" style="border-radius:50%;border:2px solid var(--border);background:var(--panel)" onerror="this.style.display='none'">
+  <h1 style="border:0;margin:12px 0 0">Abhinav Maurya</h1>
+  <div class="mt" style="font-size:14px">@abhinavmaurya12 · Developer of Gitora</div>
+  <p style="margin:16px auto;max-width:560px">Hi! 👋 I'm the developer behind <b>Gitora</b>, a lightweight GitHub-style app that runs entirely in your browser. I enjoy building useful tools and sharing my code with others.</p>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+    <a class="btn green" href="${gh}" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View GitHub profile</a>
+    <a class="btn" href="${gh}?tab=repositories" target="_blank" rel="noopener noreferrer">📁 Repositories</a>
+    <a class="btn" href="${LINKFORGE}" target="_blank" rel="noopener noreferrer">🚀 LinkForge</a>
+    <a class="btn" href="${gh}?tab=followers" target="_blank" rel="noopener noreferrer">⭐ Follow</a>
+  </div></div></div>
+  <div class="grid">
+    <div class="card"><h4>👨‍💻 About me</h4><p>Developer and open-source enthusiast who likes turning ideas into working software.</p></div>
+    <div class="card"><h4>🚀 About Gitora</h4><p>Code, collaborate and create: repositories, issues, pull requests, wikis and more, all stored locally in your browser.</p></div>
+    <div class="card"><h4>🔗 Connect</h4><div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a class="btn" href="${gh}" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+      ${soc(LINKEDIN,"💼","LinkedIn")}
+      ${soc(INSTAGRAM,"📸","Instagram")}</div></div>
+    <div class="card" style="grid-column:1/-1;text-align:center;padding:24px"><h4 style="font-size:20px">🔗 LinkForge</h4>
+      <p style="font-size:15px;color:var(--text);margin:0 0 4px"><b>All My Projects. One Destination. 🚀</b></p>
+      <p style="max-width:620px;margin:0 auto 14px">LinkForge is a centralized showcase for my live websites and web development projects. It brings all my deployed projects together in one place, allowing visitors to explore my work and access live demos without searching through multiple repositories.</p>
+      <a class="btn green" href="${LINKFORGE}" target="_blank" rel="noopener noreferrer">Visit LinkForge ↗</a></div>
+  </div></div>`}
+
 /* ================= router ================= */
 function markNav(){
   const h=(location.hash||"#/").split("?")[0];
@@ -1031,7 +1440,7 @@ function route(){
   const hash=(location.hash||"#/").slice(1),h=hash.split("?")[0];
   const seg=h.split("/").filter(Boolean).map(decodeURIComponent),P=new URLSearchParams(hash.split("?")[1]||"");
   if(!seg.length)return home();
-  switch(seg[0]){case"u":return profile(seg[1]);case"settings":return editProfile();case"new":return newRepo();case"explore":return explore(P);case"search":return search(P);case"stars":return stars();case"gists":return gists(P);case"signin":case"signup":location.hash="#/";return}
+  switch(seg[0]){case"u":return profile(seg[1]);case"about":return aboutDev();case"settings":return editProfile();case"new":return newRepo();case"explore":return explore(P);case"search":return search(P);case"stars":return stars();case"gists":return gists(P);case"notifications":return notifications();case"issues":return globalList("issue");case"pulls":return globalList("pr");case"signin":case"signup":location.hash="#/";return}
   if(seg[0]=="r"){
     const n=seg[1],a=seg[2],r=R(n);if(!r)return notFound();
     const br=seg[3]||r.default,rest=seg[4]||"";
@@ -1048,7 +1457,7 @@ function route(){
       case"pull":return thread(n,+seg[3],seg[4]=="files"?"files":"conv");
       case"compare":return compare(n,P);
       case"releases":return releases(n);
-      case"settings":return repoSettings(n)}}
+      case"settings":return repoSettings(n);case"wiki":return wiki(n,seg[3]||"Home",P);case"projects":return projects(n,seg[3]);case"insights":return insights(n,P);case"milestones":return milestones(n,P);case"commit":return commitView(n,seg[3]);case"discussions":return discussions(n,seg[3])}}
   notFound()}
 window.addEventListener("hashchange",()=>{route();window.scrollTo(0,0)});
 openDB().then(load).then(()=>{if(store.session&&store.accounts[store.session])activate(store.session);route()});
@@ -1063,7 +1472,7 @@ function themeLabel(){const t=getTheme();return"Theme: "+t[0].toUpperCase()+t.sl
 function cycleTheme(){const t=THEMES[(THEMES.indexOf(getTheme())+1)%3];try{localStorage.setItem("ch-theme",t)}catch(e){}applyTheme(t)}
 applyTheme(getTheme());
 
-const IC={
+const IC={"📊":["",'<path d="M2 13.5h12M4 13V8M8 13V3M12 13V6"/>'],"▦":["",'<rect x="2" y="2.5" width="12" height="11" rx="1.5"/><path d="M6 2.5v11M10 2.5v7"/>'],"🎯":["",'<circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3"/><circle cx="8" cy="8" r=".6"/>'],
 "📁":["f",'<path d="M1.5 4a1 1 0 011-1h3.3l1.4 1.5h6.3a1 1 0 011 1V12a1 1 0 01-1 1h-11a1 1 0 01-1-1z" fill="currentColor" stroke="none"/>'],
 "📄":["d",'<path d="M4 1.8h4.8L12 5v8.7a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5V2.3a.5.5 0 01.5-.5zM8.8 1.8V5H12"/>'],
 "🕘":["",'<circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.3 1.5"/>'],
@@ -1095,8 +1504,8 @@ let _ot;new MutationObserver(()=>{clearTimeout(_ot);_ot=setTimeout(()=>{octify($
 
 function palette(){
   if(!db.profile)return;
-  const it=[["Dashboard","#/"],["Explore","#/explore"],["New repository","#/new"],["Your stars","#/stars"],["Your gists","#/gists"],["Profile","#/u/"+db.profile.username],["Settings & backup","#/settings"]];
-  if(ctx)for(const [t,h] of [["Issues","issues"],["Pull requests","pulls"],["Releases","releases"],["Branches","branches"],["Repo settings","settings"]])it.push([ctx.n+" › "+t,"#/r/"+ctx.n+"/"+h]);
+  const it=[["Notifications","#/notifications"],["Issues","#/issues"],["Pull requests","#/pulls"],["Dashboard","#/"],["Explore","#/explore"],["New repository","#/new"],["Your stars","#/stars"],["Your gists","#/gists"],["Profile","#/u/"+db.profile.username],["Settings & backup","#/settings"]];
+  if(ctx)for(const [t,h] of [["Issues","issues"],["Pull requests","pulls"],["Releases","releases"],["Branches","branches"],["Wiki","wiki"],["Projects","projects"],["Insights","insights"],["Milestones","milestones"],["Repo settings","settings"]])it.push([ctx.n+" › "+t,"#/r/"+ctx.n+"/"+h]);
   for(const n in db.repos)it.push(["📁 "+n,"#/r/"+n]);
   let sel=0,cur=[];
   $("#modal").innerHTML='<div class="ov"><div class="dlg"><input type="text" id="pq" placeholder="Search pages, repositories… (↑ ↓ Enter)" autocomplete="off"><div id="pl"></div></div></div>';
